@@ -15,23 +15,23 @@ const PagesItems = props => {
       onMouseLeave={closePagesHandlerChildren}
         className={` flex flex-col  left-0 transition-all duration-700 bg-white shadow-md `}>
         {/* menu  */}
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           <Link
             href="/"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            1
+            خانه
           </Link>
           <Link
-            href="/"
+            href="/shop"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            2
+            فروشگاه
           </Link>
           <Link
-            href="/"
+            href="/contact-us"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            3
+            تماس با ما
           </Link>
-          <Link
+          {/* <Link
             href="/"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
             4
@@ -40,7 +40,7 @@ const PagesItems = props => {
             href="/"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
             5
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
