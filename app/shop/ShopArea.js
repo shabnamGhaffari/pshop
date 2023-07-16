@@ -1,6 +1,28 @@
-import React from "react";
+"use client";
+
+import React, {useEffect, useState} from "react";
+import {shopAxios} from "../../axios/shopAxios";
+import Pagination from "./Pagination";
+
 
 const ShopArea = () => {
+    const[items,setItems]=useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize,setPageSize] = useState(null);
+
+  const onPageChange = page => {
+    setCurrentPage(page);
+  };
+  const getProductList = async () => {
+    const response = await shopAxios.get(`/products?page=${currentPage}`);
+    const data = response?.data?.total;
+    console.log(data);
+    setPageSize(response?.data?.limit);
+    setItems(data)
+  };
+  useEffect(() => {
+    getProductList();
+  }, []);
   return (
     <section className="shop_grid_area section-padding-80">
       <div className="container flex mx-auto px-8 lg:px-32">
@@ -245,8 +267,11 @@ const ShopArea = () => {
             {/* Sorting  */}
             <div className="product-sorting flex items-center">
               <div>Sort by:</div>
-              <form action="#" method="get" >
-                <select name="select" id="sortByselect" className="cursor-pointer">
+              <form action="#" method="get">
+                <select
+                  name="select"
+                  id="sortByselect"
+                  className="cursor-pointer">
                   <option value="value">Highest Rated</option>
                   <option value="value">Newest</option>
                   <option value="value">Price: $$ - $</option>
@@ -301,371 +326,337 @@ const ShopArea = () => {
               </div>
             </div>
             {/* Single Product  */}
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-2.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-3.jpg"
-                    alt=""
-                  />
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-2.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-3.jpg"
+                  alt=""
+                />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
                 </div>
+              </div>
 
-                {/* Product Description  */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+              {/* Product Description  */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
 
-                  {/* Hover Content  */}
-                  <div className="hover-content">
-                    {/* Add to Cart */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+                {/* Hover Content  */}
+                <div className="hover-content">
+                  {/* Add to Cart */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
+            </div>
             {/* Single Product  */}
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-3.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-4.jpg"
-                    alt=""
-                  />
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-3.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-4.jpg"
+                  alt=""
+                />
 
-                  {/* Product Badge  */}
-                  <div className="product-badge new-badge">
-                    <span>New</span>
-                  </div>
-
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+                {/* Product Badge  */}
+                <div className="product-badge new-badge">
+                  <span>New</span>
                 </div>
 
-                {/* Product Description  */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
+                </div>
+              </div>
 
-                  {/* <!-- Hover Content */}
-                  <div className="hover-content">
-                    {/* Add to Cart  */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+              {/* Product Description  */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
+
+                {/* <!-- Hover Content */}
+                <div className="hover-content">
+                  {/* Add to Cart  */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-           
+            </div>
+
             {/* Single Product  */}
-           
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image */}
-                <div className="product-img">
-                  <img src="images/product-img/product-4.jpg" alt="" />
-                  {/* Hover Thumb */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-5.jpg"
-                    alt=""
-                  />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image */}
+              <div className="product-img">
+                <img src="images/product-img/product-4.jpg" alt="" />
+                {/* Hover Thumb */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-5.jpg"
+                  alt=""
+                />
+
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
                 </div>
+              </div>
 
-                {/* Product Description */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+              {/* Product Description */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
 
-                  {/* Hover Content */}
-                  <div className="hover-content">
-                    {/* Add to Cart */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+                {/* Hover Content */}
+                <div className="hover-content">
+                  {/* Add to Cart */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-           
+            </div>
+
             {/* Single Product */}
-           
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image */}
-                <div className="product-img">
-                  <img src="images/product-img/product-5.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-6.jpg"
-                    alt=""
-                  />
 
-                  {/* Product Badge  */}
-                  <div className="product-badge offer-badge">
-                    <span>-30%</span>
-                  </div>
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image */}
+              <div className="product-img">
+                <img src="images/product-img/product-5.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-6.jpg"
+                  alt=""
+                />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+                {/* Product Badge  */}
+                <div className="product-badge offer-badge">
+                  <span>-30%</span>
                 </div>
 
-                {/* Product Description  */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">
-                    <span className="old-price">$75.00</span> $55.00
-                  </p>
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
+                </div>
+              </div>
 
-                  {/* Hover Content */}
-                  <div className="hover-content">
-                    {/* Add to Cart  */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+              {/* Product Description  */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">
+                  <span className="old-price">$75.00</span> $55.00
+                </p>
+
+                {/* Hover Content */}
+                <div className="hover-content">
+                  {/* Add to Cart  */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-           
+            </div>
+
             {/* Single Product  */}
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-6.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-7.jpg"
-                    alt=""
-                  />
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-6.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-7.jpg"
+                  alt=""
+                />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
                 </div>
+              </div>
 
-                {/* Product Description  */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+              {/* Product Description  */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
 
-                  {/* Hover Content  */}
-                  <div className="hover-content">
-                    {/* Add to Cart  */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+                {/* Hover Content  */}
+                <div className="hover-content">
+                  {/* Add to Cart  */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-          
+            </div>
+
             {/* <!-- Single Product */}
-           
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-7.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-8.jpg"
-                    alt=""
-                  />
 
-                  {/* Product Badge */}
-                  <div className="product-badge new-badge">
-                    <span>New</span>
-                  </div>
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-7.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-8.jpg"
+                  alt=""
+                />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+                {/* Product Badge */}
+                <div className="product-badge new-badge">
+                  <span>New</span>
                 </div>
 
-                {/* Product Description */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
+                </div>
+              </div>
 
-                  {/* Hover Content  */}
-                  <div className="hover-content">
-                    {/* Add to Cart */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+              {/* Product Description */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
+
+                {/* Hover Content  */}
+                <div className="hover-content">
+                  {/* Add to Cart */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-            
+            </div>
+
             {/* Single Product */}
-            
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-8.jpg" alt="" />
-                  {/* Hover Thumb  */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-9.jpg"
-                    alt=""
-                  />
 
-                  {/* Favourite */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-8.jpg" alt="" />
+                {/* Hover Thumb  */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-9.jpg"
+                  alt=""
+                />
+
+                {/* Favourite */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
                 </div>
+              </div>
 
-                {/* Product Description */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+              {/* Product Description */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
 
-                  {/* Hover Content  */}
-                  <div className="hover-content">
-                    {/* Add to Cart  */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+                {/* Hover Content  */}
+                <div className="hover-content">
+                  {/* Add to Cart  */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-          
+            </div>
+
             {/* Single Product  */}
-            
-              <div className="single-product-wrapper w-[30%]">
-                {/* Product Image  */}
-                <div className="product-img">
-                  <img src="images/product-img/product-9.jpg" alt="" />
-                  {/* Hover Thumb */}
-                  <img
-                    className="hover-img"
-                    src="images/product-img/product-1.jpg"
-                    alt=""
-                  />
 
-                  {/* Favourite  */}
-                  <div className="product-favourite">
-                    <a href="#" className="favme fa fa-heart"></a>
-                  </div>
+            <div className="single-product-wrapper w-[30%]">
+              {/* Product Image  */}
+              <div className="product-img">
+                <img src="images/product-img/product-9.jpg" alt="" />
+                {/* Hover Thumb */}
+                <img
+                  className="hover-img"
+                  src="images/product-img/product-1.jpg"
+                  alt=""
+                />
+
+                {/* Favourite  */}
+                <div className="product-favourite">
+                  <a href="#" className="favme fa fa-heart"></a>
                 </div>
+              </div>
 
-                {/* Product Description  */}
-                <div className="product-description">
-                  <span>topshop</span>
-                  <a href="single-product-details.html">
-                    <h6>Knot Front Mini Dress</h6>
-                  </a>
-                  <p className="product-price">$80.00</p>
+              {/* Product Description  */}
+              <div className="product-description">
+                <span>topshop</span>
+                <a href="single-product-details.html">
+                  <h6>Knot Front Mini Dress</h6>
+                </a>
+                <p className="product-price">$80.00</p>
 
-                  {/* Hover Content  */}
-                  <div className="hover-content">
-                    {/* Add to Cart  */}
-                    <div className="add-to-cart-btn">
-                      <a href="#" className="btn essence-btn">
-                        Add to Cart
-                      </a>
-                    </div>
+                {/* Hover Content  */}
+                <div className="hover-content">
+                  {/* Add to Cart  */}
+                  <div className="add-to-cart-btn">
+                    <a href="#" className="btn essence-btn">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
               </div>
-           
+            </div>
           </div>
           {/* Pagination */}
-          {/* <nav aria-label="navigation">
-            <ul className="pagination mt-50 mb-70">
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  <i className="fa fa-angle-left"></i>
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  ...
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  21
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  <i className="fa fa-angle-right"></i>
-                </a>
-              </li>
-            </ul>
-          </nav> */}
+          <Pagination
+            items={Number(items)}
+            currentPage={currentPage} 
+            pageSize={Number(pageSize)}
+            onPageChange={onPageChange}
+          />
         </div>
       </div>
     </section>
