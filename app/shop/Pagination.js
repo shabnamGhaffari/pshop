@@ -1,22 +1,35 @@
 import styles from "./pagination.module.css";
-const Pagination = ({items, pageSize, currentPage, onPageChange}) => {
-  const pagesCount = Math.ceil(Number(items) / Number(pageSize)); 
+import {GrFormNext, GrFormPrevious} from "react-icons/gr";
+const Pagination = ({
+  items,
+  pageSize,
+  currentPage,
+  onPageChange,
+  nextPage,
+  prevPage,
+}) => {
+  const pagesCount = Math.ceil(Number(items) / Number(pageSize));
   console.log(pageSize);
-//   if (pagesCount === 1) return null;
-let pagesArray=[];
-for(let i=1;i<=pagesCount;i++){
-    pagesArray.push(i)
-}
-console.log(pagesArray)
+  //   if (pagesCount === 1) return null;
+  let pagesArray = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pagesArray.push(i);
+  }
+  console.log(pagesArray);
   const pages = Array.from(pageSize);
   console.log(pages);
   return (
-    <div>
+    <>
       <ul className={styles.pagination}>
         <li class="page-item">
-          <a class="page-link" href="#">
-            <i class="fa fa-angle-left"></i>
-          </a>
+          {/* <a class="page-link" href="#"> */}
+          <GrFormPrevious
+            size={22}
+            className="cursor-pointer"
+            onClick={prevPage}
+          />
+
+          {/* </a> */}
         </li>
         {pagesArray.map(page => (
           <li
@@ -30,12 +43,12 @@ console.log(pagesArray)
           </li>
         ))}
         <li class="page-item">
-          <a class="page-link" href="#">
-            <i class="fa fa-angle-right"></i>
-          </a>
+          {/* <a class="page-link" href="#"> */}
+          <GrFormNext size={22} className="cursor-pointer" onClick={nextPage} />
+          {/* </a> */}
         </li>
       </ul>
-    </div>
+    </>
   );
 };
 export default Pagination;
