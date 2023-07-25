@@ -12,6 +12,7 @@
     "@netlify/next": "^1.4.9",
     "axios": "^1.4.0",
     "next": "13.4.9",
+    "rc-pagination": "^3.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",

@@ -1,27 +1,35 @@
 "use client";
-
+import Pagination from "rc-pagination";
 import React, {useEffect, useState} from "react";
 import {shopAxios} from "../../axios/shopAxios";
-import Pagination from "./Pagination";
+import "./pagination.css";
 
+import {GrFormNext, GrFormPrevious} from "react-icons/gr";
+import Link from "next/link";
 const ShopArea = () => {
   const [showSubItems, setShowSubItems] = useState(false);
   const [total, setTotal] = useState(null);
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(null);
+  const [brandsList, setBrandsList] = useState([]);
 
   const onPageChange = page => {
     setCurrentPage(page);
   };
   const getProductList = async () => {
     const response = await shopAxios.get(`/products?page=${currentPage}`);
-    const data = response?.data?.total;
-    console.log("dd", response?.data);
     setPageSize(response?.data?.limit);
-    setTotal(data);
+    setTotal(response?.data?.total);
     setItems(response?.data?.data);
   };
+  const getBrandsList = async () => {
+    const response = await shopAxios.get(`/brands`);
+    setBrandsList(response?.data?.data);
+  };
+  useEffect(() => {
+    getBrandsList();
+  }, []);
   useEffect(() => {
     getProductList();
   }, [currentPage]);
@@ -53,7 +61,11 @@ const ShopArea = () => {
                   <a href="#" onClick={() => setShowSubItems(!showSubItems)}>
                     clothing
                   </a>
-                  <ul className={`sub-menu transition-all duration-700 show ${showSubItems ?"h-auto opacity-1" :"opacity-0 h-0" }`} id="clothing">
+                  <ul
+                    className={`sub-menu transition-all duration-700 show ${
+                      showSubItems ? "h-auto opacity-1" : "opacity-0 h-0"
+                    }`}
+                    id="clothing">
                     <li>
                       <a href="#">All</a>
                     </li>
@@ -178,10 +190,10 @@ const ShopArea = () => {
           </div>
 
           {/* ##### Single Widget #####  */}
-          <div className="widget price mb-50">
-            {/* Widget Title  */}
+          {/* <div className="widget price mb-50">
+           
             <h6 className="widget-title mb-30">Filter by</h6>
-            {/* Widget Title 2  */}
+        
             <p className="widget-title2 mb-30">Price</p>
 
             <div className="widget-desc">
@@ -205,7 +217,7 @@ const ShopArea = () => {
                 <div className="range-price">Range: $49.00 - $360.00</div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* ##### Single Widget #####  */}
           {/* <div className="widget color mb-50">
@@ -248,32 +260,22 @@ const ShopArea = () => {
           </div> */}
 
           {/* ##### Single Widget ##### */}
-          <div className="widget brands mb-50">
+          <div className="widget brands mb-50 mt-52">
             {/* Widget Title 2  */}
-            <p className="widget-title2 mb-30">Brands</p>
+            <p className="widget-title2 mb-30">برندها</p>
             <div className="widget-desc">
               <ul>
-                <li>
-                  <a href="#">Asos</a>
-                </li>
-                <li>
-                  <a href="#">Mango</a>
-                </li>
-                <li>
-                  <a href="#">River Island</a>
-                </li>
-                <li>
-                  <a href="#">Topshop</a>
-                </li>
-                <li>
-                  <a href="#">Zara</a>
-                </li>
+                {brandsList.map(brand => (
+                  <li>
+                    <a href="#">{brand?.name}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
-        <div className="shop_grid_product_area flex-[70%] flex flex-col">
-          <div className="product-topbar flex items-center justify-between">
+        <div className="shop_grid_product_area flex-[70%] flex flex-col items-center">
+          <div className="product-topbar flex flex-row items-center justify-between w-full">
             {/* Total Products  */}
             <div className="total-products">
               <p>
@@ -281,8 +283,8 @@ const ShopArea = () => {
               </p>
             </div>
             {/* Sorting  */}
-            <div className="product-sorting flex items-center">
-              <div>Sort by:</div>
+            {/* <div className="product-sorting flex items-center">
+              <div>مرتب سازی:</div>
               <form action="#" method="get">
                 <select
                   name="select"
@@ -295,31 +297,30 @@ const ShopArea = () => {
                 </select>
                 <input type="submit" className="hidden" value="" />
               </form>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-wrap flex-auto justify-between">
             {/* Single Product  */}
             {items?.length &&
               items.map(item => (
-                <div className="single-product-wrapper w-[95%] md:w-[45%] lg:w-[30%]">
+                <Link href={`/products/${item?.id}`} className="single-product-wrapper w-[95%] md:w-[45%] lg:w-[30%]">
                   {/* Product Image  */}
                   <div className="product-img">
-                    <img src="images/product-img/product-1.jpg" alt="" />
+                    <img src={item?.images[0]["image_path"]} alt={item?.images[0]["image_name"]} />
                     {/* Hover Thumb  */}
                     <img
                       className="hover-img"
-                      src="images/product-img/product-2.jpg"
-                      alt=""
+                      src={item?.images[1]["image_path"]} alt={item?.images[1]["image_name"]}
                     />
 
                     {/* Product Badge  */}
-                    <div className="product-badge offer-badge">
+                    {/* <div className="product-badge offer-badge">
                       <span>-30%</span>
-                    </div>
+                    </div> */}
                     {/* Favourite  */}
-                    <div className="product-favourite">
+                    {/* <div className="product-favourite">
                       <a href="#" className="favme fa fa-heart"></a>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Product Description */}
@@ -329,7 +330,8 @@ const ShopArea = () => {
                       <h6>{item?.name}</h6>
                     </a>
                     <p className="product-price">
-                      <span className="old-price">$75.00</span> $55.00
+                      {/* <span className="old-price">$75.00</span> */}
+                      {item?.price}
                     </p>
 
                     {/* Hover Content */}
@@ -342,17 +344,36 @@ const ShopArea = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
           </div>
-          {/* Pagination */}
           <Pagination
-            items={Number(total)}
-            currentPage={currentPage}
-            pageSize={Number(pageSize)}
-            onPageChange={onPageChange}
-            nextPage={nextPage}
-            prevPage={prevPage}
+            style={{
+              display: "flex",
+              width: "60%",
+              justifyContent: "space-between",
+              flexDirection: "row-reverse",
+              cursor: "pointer",
+              alignItems: "center",
+            }}
+            pageSize={pageSize}
+            total={total}
+            current={currentPage}
+            onChange={(currentPage, pageSize) => setCurrentPage(currentPage)}
+            // prevIcon={
+            //   <GrFormPrevious
+            //     size={22}
+            //     className="cursor-pointer"
+            //     onClick={prevPage}
+            //   />
+            // }
+            // nextIcon={
+            //   <GrFormNext
+            //     size={22}
+            //     className="cursor-pointer"
+            //     onClick={nextPage}
+            //   />
+            // }
           />
         </div>
       </div>

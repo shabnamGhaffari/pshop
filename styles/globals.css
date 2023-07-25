@@ -2360,12 +2360,7 @@ img {
 .contact-area .contact-info .contact-address p:last-child a:hover {
   color: #0315ff;
 }
-.slick-slide > div {
-  margin: 0 10px;
-}
-.slick-list {
-  margin: 0 -10px;
-}
+
 /* ##### The End ##### */
 
 /*# sourceMappingURL=core-style.css.map */

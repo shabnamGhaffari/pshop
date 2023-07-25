@@ -1,0 +1,16 @@
+.rc-pagination-item-active a{
+ background-color: #f4f4f4;
+ display: inline-flex;
+ justify-content: center;
+ align-items: center;
+ width: 30px;
+ height: 30px;
+ border-radius: 5px;
+}
+.rc-pagination-item a{
+  display: inline-flex;
+ justify-content: center;
+ align-items: center;
+ width: 30px;
+ height: 30px;
+}

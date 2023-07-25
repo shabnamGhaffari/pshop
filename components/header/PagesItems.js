@@ -22,7 +22,7 @@ const PagesItems = props => {
             خانه
           </Link>
           <Link
-            href="/shop"
+            href="/products"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
             فروشگاه
           </Link>

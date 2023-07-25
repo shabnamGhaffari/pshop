@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 w-full shadow md:h-20 px-2 z-[100] bg-white">
+      <header className="fixed top-0 left-0 right-0 w-full shadow md:h-20 px-2 z-[10000] bg-white">
         {/* right side of navbar */}
         <section className="flex flex-col md:flex-row md:justify-between h-full items-center">
           <MenuContainer
