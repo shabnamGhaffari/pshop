@@ -1806,7 +1806,7 @@ img {
 }
 @media only screen and (max-width: 767px) {
   .order-details-confirmation {
-    margin-top: 100px;
+    margin-top: 10px;
     padding: 20px;
   }
 }

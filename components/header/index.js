@@ -7,6 +7,7 @@ import MenuContainer from "./MenuContainer";
 import MenuItems from "./MenuItems";
 import HamburgerMenu from "./HamburgerMenu";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,23 +71,23 @@ export default function Header() {
             </div>
             {/* Favourite Area */}
             <div className="md:w-20 flex items-center justify-center">
-              <a href="#">
+              <Link href="#">
                 <MdFavoriteBorder size={25} />
-              </a>
+              </Link>
             </div>
             {/* User Login Info */}
             <div className="md:w-20 flex items-center justify-center">
-              <a href="#">
+              <Link href="#">
                 <HiOutlineUser size={25} />
-              </a>
+              </Link>
             </div>
             {/* Cart Area */}
-            <div className="md:w-20 flex items-center justify-center">
+            <Link href="/" className="md:w-20 flex items-center justify-center">
               <CgShoppingCart size={25} />{" "}
               <span className="absolute left-[26px] top-[32px]  md:left-[60px] md:top-[20px] text-xs">
                 3
               </span>
-            </div>
+            </Link>
           </div>
         </section>
         {showChildren && (
