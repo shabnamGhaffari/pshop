@@ -20,15 +20,15 @@ const FooterPage = () => {
               <img src="img/core-img/logo2.png" alt="" />
               Logo Image
             </Link>
-            <Link className="text-gray-light hover:text-white" href="shop.html">
+            <Link className="text-gray-light hover:text-white" href="/products">
               فروشگاه
             </Link>
-            <Link className="text-gray-light hover:text-white" href="blog.html">
+            {/* <Link className="text-gray-light hover:text-white" href="blog.html">
               بلاگ
-            </Link>
+            </Link> */}
             <Link
               className="text-gray-light hover:text-white"
-              href="contact.html">
+              href="/contact-us">
               تماس با ما
             </Link>
           </div>

@@ -112,7 +112,7 @@ const product = ({params}) => {
           </a>
           <p className="product-price">
             {/* <span className="old-price">$65.00</span> */}
-             ${productDetail?.price}
+             {productDetail?.price}تومان  
           </p>
           <p className="product-desc">
            {productDetail?.description}

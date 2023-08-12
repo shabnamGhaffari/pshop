@@ -48,15 +48,15 @@ const ShopArea = () => {
   return (
     <section className="shop_grid_area section-padding-80">
       <div className="container flex flex-col md:flex-row mx-auto px-8 lg:px-32">
-        <div className="shop_sidebar_area flex-[25%]">
-          {/* ##### Single Widget #####  */}
+        {/* <div className="shop_sidebar_area flex-[25%]">
+         
           <div className="widget catagory">
-            {/* Widget Title  */}
+          
             <h6 className="widget-title">دسته بندی ها</h6>
-            {/* Catagories   */}
+           
             <div className="catagories-menu mt-8">
               <ul id="menu-content2" className="menu-content show">
-                {/* Single Item  */}
+               
                 <li data-toggle="collapse" data-target="#clothing">
                   <a href="#" onClick={() => setShowSubItems(!showSubItems)}>
                     clothing
@@ -101,7 +101,7 @@ const ShopArea = () => {
                     </li>
                   </ul>
                 </li>
-                {/* Single Item  */}
+            
                 <li
                   data-toggle="collapse"
                   data-target="#shoes"
@@ -143,7 +143,7 @@ const ShopArea = () => {
                     </li>
                   </ul>
                 </li>
-                {/* Single Item  */}
+                
                 <li
                   data-toggle="collapse"
                   data-target="#accessories"
@@ -189,79 +189,8 @@ const ShopArea = () => {
             </div>
           </div>
 
-          {/* ##### Single Widget #####  */}
-          {/* <div className="widget price mb-50">
-           
-            <h6 className="widget-title mb-30">Filter by</h6>
-        
-            <p className="widget-title2 mb-30">Price</p>
-
-            <div className="widget-desc">
-              <div className="slider-range">
-                <div
-                  data-min="49"
-                  data-max="360"
-                  data-unit="$"
-                  className="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                  data-value-min="49"
-                  data-value-max="360"
-                  data-label-result="Range:">
-                  <div className="ui-slider-range ui-widget-header ui-corner-all"></div>
-                  <span
-                    className="ui-slider-handle ui-state-default ui-corner-all"
-                    tabindex="0"></span>
-                  <span
-                    className="ui-slider-handle ui-state-default ui-corner-all"
-                    tabindex="0"></span>
-                </div>
-                <div className="range-price">Range: $49.00 - $360.00</div>
-              </div>
-            </div>
-          </div> */}
-
-          {/* ##### Single Widget #####  */}
-          {/* <div className="widget color mb-50">
-      
-            <p className="widget-title2 mb-30">Color</p>
-            <div className="widget-desc">
-              <ul className="flex">
-                <li>
-                  <a href="#" className="color1"></a>
-                </li>
-                <li>
-                  <a href="#" className="color2"></a>
-                </li>
-                <li>
-                  <a href="#" className="color3"></a>
-                </li>
-                <li>
-                  <a href="#" className="color4"></a>
-                </li>
-                <li>
-                  <a href="#" className="color5"></a>
-                </li>
-                <li>
-                  <a href="#" className="color6"></a>
-                </li>
-                <li>
-                  <a href="#" className="color7"></a>
-                </li>
-                <li>
-                  <a href="#" className="color8"></a>
-                </li>
-                <li>
-                  <a href="#" className="color9"></a>
-                </li>
-                <li>
-                  <a href="#" className="color10"></a>
-                </li>
-              </ul>
-            </div>
-          </div> */}
-
-          {/* ##### Single Widget ##### */}
           <div className="widget brands mb-50 mt-52">
-            {/* Widget Title 2  */}
+       
             <p className="widget-title2 mb-30">برندها</p>
             <div className="widget-desc">
               <ul>
@@ -273,7 +202,7 @@ const ShopArea = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="shop_grid_product_area flex-[70%] flex flex-col items-center">
           <div className="product-topbar flex flex-row items-center justify-between w-full">
             {/* Total Products  */}

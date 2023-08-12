@@ -12,7 +12,6 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
         `/categories?limit=1000&sub_categories=true`
       );
       const {data} = response.data;
-      console.log(data);
       setMenuList(data);
     };
     getData();
@@ -33,7 +32,7 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
         <div className="flex flex-col gap-1">
           {menuList[0]?.sub_categories?.map(item => (
             <Link
-              href="/"
+              href={`/categories/${item?.id}`}
               className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
               {item?.name}
             </Link>
@@ -47,7 +46,7 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
         <div className="flex flex-col gap-1">
           {menuList[1]?.sub_categories?.map(item => (
             <Link
-              href="/"
+              href={`/categories/${item?.id}`}
               className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
               {item?.name}
             </Link>
@@ -61,7 +60,7 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
         <div className="flex flex-col gap-1">
           {menuList[2]?.sub_categories?.map(item => (
             <Link
-              href="/"
+              href={`/categories/${item?.id}`}
               className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
               {item?.name}
             </Link>

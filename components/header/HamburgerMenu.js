@@ -24,7 +24,7 @@ const HamburgerMenu = ({closeHabmurgurMenu}) => {
     setOpenPagesMenu(!openPagesMenu);
   };
   return (
-    <div className="fixed lg:hidden w-[300px] z-[100] overflow-y-auto bg-white top-0 h-screen flex flex-col shadow-lg">
+    <div className="fixed lg:hidden w-[300px] z-[10000] overflow-y-auto bg-white top-0 h-screen flex flex-col shadow-lg">
       {/* close icon */}
       <div
         className="self-end mt-2 cursor-pointer py-3"
@@ -131,38 +131,28 @@ const HamburgerMenu = ({closeHabmurgurMenu}) => {
           <Link
             href="/"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            1
+            صفحه اصلی
           </Link>
           <Link
-            href="/"
+            href="/products"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            2
+            فروشگاه
           </Link>
           <Link
-            href="/"
+            href="/contact-us"
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            3
-          </Link>
-          <Link
-            href="/"
-            className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            4
-          </Link>
-          <Link
-            href="/"
-            className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            5
+            تماس با ما
           </Link>
         </div>
-        <Link
+        {/* <Link
           href="#"
           className="block bg-gray p-2 pl-3 pr-4 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700  dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
           بلاگ
-        </Link>
+        </Link> */}
 
         <Link
-          href="#"
-          className="block bg-gray p-2 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700  dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+          href="/contact-us"
+          className="block bg-gray p-2 text-gray-medium  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700  dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
           تماس با ما
         </Link>
 
