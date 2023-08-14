@@ -6,7 +6,6 @@ const MainCategories = () => {
   const [tags, setTags] = useState([]);
   const getTags = async () => {
     const response = await shopAxios.get("/tags");
-    console.log("rrr", response);
     setTags(response?.data?.data);
   };
   useEffect(() => {
@@ -21,7 +20,7 @@ const MainCategories = () => {
               className="single_catagory_area flex items-center justify-center bg-img"
               style={{"background-image": `url(${tag?.image_path})`}}>
               <div className="catagory-content">
-                <a href="#">{tag?.name}</a>
+                <a href={`/tags/${tag?.id}`}>{tag?.name}</a>
               </div>
             </div>
           ))}
