@@ -1,7 +1,7 @@
 "use client";
 import Pagination from "rc-pagination";
 import React, {useEffect, useState} from "react";
-import { shopAxios } from "../../../axios/shopAxios";
+import {shopAxios} from "../../../axios/shopAxios";
 import "../../products/pagination.css";
 
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
@@ -17,11 +17,13 @@ const Categories = ({params}) => {
     setCurrentPage(page);
   };
   const getProductList = async () => {
-    const response = await shopAxios.get(`/categories/${categoryId}?page=${currentPage}`);
-    console.log('response',response);
-    // setPageSize(response?.data?.limit);
-    // setTotal(response?.data?.total);
-    setItems(response?.data?.data?.products);
+    try {
+      const response = await shopAxios.get(`/categories/${categoryId}`);
+      console.log("response", response);
+      setPageSize(response?.data?.limit);
+      setTotal(response?.data?.total);
+      setItems(response?.data?.data);
+    } catch {}
   };
 
   useEffect(() => {

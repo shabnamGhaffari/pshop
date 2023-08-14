@@ -10,7 +10,6 @@ const PopularProducts = () => {
   const getProductList = async () => {
     const response = await shopAxios.get(`/products?column=view_count`);
     setProductList(response?.data?.data);
-    console.log(response?.data?.data);
   };
   useEffect(() => {
     getProductList();
@@ -61,11 +60,14 @@ const PopularProducts = () => {
           {productList?.map(product => (
             <div className="single-product-wrapper">
               <div className="product-img">
-              
-                <img src={product?.images[0]["image_path"]} alt={product?.images[0]["image_name"]} />
+                <img
+                  src={product?.images[0]["image_path"]}
+                  alt={product?.images[0]["image_name"]}
+                />
                 <img
                   className="hover-img"
-                  src={product?.images[1]["image_path"]} alt={product?.images[1]["image_name"]}
+                  src={product?.images[1]["image_path"]}
+                  alt={product?.images[1]["image_name"]}
                 />
                 {/* <div className="product-favourite">
                   <a href="#" className="favme fa fa-heart"></a>
