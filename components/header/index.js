@@ -8,6 +8,7 @@ import MenuItems from "./MenuItems";
 import HamburgerMenu from "./HamburgerMenu";
 import { useState } from "react";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +39,8 @@ export default function Header() {
   const closeHabmurgurMenu = () => {
     setIsHamburgurMenuOpen(false);
   };
+  const count = useSelector((state) => state.basketReducer.count);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -85,7 +88,7 @@ export default function Header() {
             <Link href="/" className="md:w-20 flex items-center justify-center">
               <CgShoppingCart size={25} />{" "}
               <span className="absolute left-[26px] top-[32px]  md:left-[60px] md:top-[20px] text-xs">
-                3
+                {count}
               </span>
             </Link>
           </div>

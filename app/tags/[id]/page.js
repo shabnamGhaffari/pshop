@@ -20,9 +20,9 @@ const Tags = ({params}) => {
     try {
       const response = await shopAxios.get(`/tags/${tagId}`);
       console.log("response", response);
-    //   setPageSize(response?.data?.limit);
-    //   setTotal(response?.data?.total);
-      setItems(response?.data?.data?.products);
+      setPageSize(response?.data?.limit);
+      setTotal(response?.data?.total);
+      setItems(response?.data?.data);
     } catch {}
   };
 
@@ -88,15 +88,6 @@ const Tags = ({params}) => {
                       src={item?.images[1]["image_path"]}
                       alt={item?.images[1]["image_name"]}
                     />
-
-                    {/* Product Badge  */}
-                    {/* <div className="product-badge offer-badge">
-                      <span>-30%</span>
-                    </div> */}
-                    {/* Favourite  */}
-                    {/* <div className="product-favourite">
-                      <a href="#" className="favme fa fa-heart"></a>
-                    </div> */}
                   </div>
 
                   {/* Product Description */}
