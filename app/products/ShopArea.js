@@ -237,9 +237,7 @@ const ShopArea = () => {
             {/* Single Product  */}
             {items?.length &&
               items.map(item => (
-                <div
-                 
-                  className="single-product-wrapper w-[95%] md:w-[45%] lg:w-[30%]">
+                <div className="single-product-wrapper w-[95%] md:w-[45%] lg:w-[30%]">
                   {/* Product Image  */}
                   <Link href={`/products/${item?.id}`} className="product-img">
                     <img
@@ -267,10 +265,14 @@ const ShopArea = () => {
                   <div className="product-description">
                     <span>{item?.manufacturer?.name}</span>
                     <h6>{item?.name}</h6>
-                    <p className="product-price">
-                      {/* <span className="old-price">$75.00</span> */}
-                      {item?.price}
-                    </p>
+                    <div className="flex items-center gap-1">
+                      <p className="product-price">
+                        {/* <span className="old-price">$75.00</span> */}
+                        {item?.price}
+                      </p>
+                      <div>تومان</div>
+                    </div>
+
                     {/* Hover Content */}
                     <div className="hover-content">
                       {/* Add to Cart  */}

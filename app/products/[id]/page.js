@@ -117,10 +117,14 @@ const product = ({params}) => {
           <a href="cart.html">
             <h2>{productDetail?.name}</h2>
           </a>
-          <p className="product-price">
-            {/* <span className="old-price">$65.00</span> */}
-            {productDetail?.price}تومان
-          </p>
+          <div className="flex items-center gap-1">
+            <p className="product-price">
+              {/* <span className="old-price">$65.00</span> */}
+              {productDetail?.price}
+            </p>
+            <div>تومان</div>
+          </div>
+
           <p className="product-desc">{productDetail?.description}</p>
 
           {/* Form  */}

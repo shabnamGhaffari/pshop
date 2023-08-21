@@ -5,15 +5,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 import {shopAxios} from "../../../axios/shopAxios";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../../../redux/slices/basketSlice";
+import {useDispatch} from "react-redux";
+import {addToBasket} from "../../../redux/slices/basketSlice";
+import Link from "next/link";
 const PopularProducts = () => {
   const [productList, setProductList] = useState([]);
   const getProductList = async () => {
     const response = await shopAxios.get(`/products?column=view_count`);
     setProductList(response?.data?.data);
   };
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     getProductList();
   }, []);
@@ -50,9 +51,9 @@ const PopularProducts = () => {
       },
     ],
   };
-  const addToBasketHandler=(item)=>{
-    dispatch(addToBasket(item))
-  }
+  const addToBasketHandler = item => {
+    dispatch(addToBasket(item));
+  };
   return (
     <section className="new_arrivals_area section-padding-80 clearfix">
       <div className="container mx-auto px-8 lg:px-32">
@@ -65,7 +66,7 @@ const PopularProducts = () => {
           {/* Single Product  */}
           {productList?.map(product => (
             <div className="single-product-wrapper">
-              <div className="product-img">
+              <Link href={`/products/${product?.id}`} className="product-img">
                 <img
                   src={product?.images[0]["image_path"]}
                   alt={product?.images[0]["image_name"]}
@@ -75,19 +76,19 @@ const PopularProducts = () => {
                   src={product?.images[1]["image_path"]}
                   alt={product?.images[1]["image_name"]}
                 />
-                {/* <div className="product-favourite">
-                  <a href="#" className="favme fa fa-heart"></a>
-                </div> */}
-              </div>
-              <div className="product-description text-right">
+              </Link>
+              <div className="product-description text-right flex flex-col justify-between items-end">
                 <span>{product?.name}</span>
-                <a href="single-product-details.html">
-                  <h6>{product?.description}</h6>
-                </a>
-                <p className="product-price">${product?.price}</p>
+                <h6>{product?.description}</h6>
+                <div className="flex items-center gap-1">
+                  <div>تومان</div>
+                  <p className="product-price">{product?.price}</p>
+                </div>
                 <div className="hover-content">
                   <div className="add-to-cart-btn">
-                    <button onClick={()=>addToBasketHandler(product)} className="btn essence-btn">
+                    <button
+                      onClick={() => addToBasketHandler(product)}
+                      className="btn essence-btn">
                       اضافه به سبد خرید
                     </button>
                   </div>

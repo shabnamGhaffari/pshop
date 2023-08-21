@@ -1113,6 +1113,9 @@ img {
   position: relative;
   z-index: 1;
   padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .single-product-wrapper .product-description span {
   font-size: 10px;
@@ -1125,6 +1128,9 @@ img {
 .single-product-wrapper .product-description h6 {
   color: #222222;
   margin-bottom: 5px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis
 }
 .single-product-wrapper .product-description p {
   margin-bottom: 0;
