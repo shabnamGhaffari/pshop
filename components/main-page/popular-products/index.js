@@ -5,12 +5,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 import {shopAxios} from "../../../axios/shopAxios";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../../redux/slices/basketSlice";
 const PopularProducts = () => {
   const [productList, setProductList] = useState([]);
   const getProductList = async () => {
     const response = await shopAxios.get(`/products?column=view_count`);
     setProductList(response?.data?.data);
   };
+  const dispatch=useDispatch()
   useEffect(() => {
     getProductList();
   }, []);
@@ -47,6 +50,9 @@ const PopularProducts = () => {
       },
     ],
   };
+  const addToBasketHandler=(item)=>{
+    dispatch(addToBasket(item))
+  }
   return (
     <section className="new_arrivals_area section-padding-80 clearfix">
       <div className="container mx-auto px-8 lg:px-32">
@@ -81,9 +87,9 @@ const PopularProducts = () => {
                 <p className="product-price">${product?.price}</p>
                 <div className="hover-content">
                   <div className="add-to-cart-btn">
-                    <a href="#" className="btn essence-btn">
-                      Add to Cart
-                    </a>
+                    <button onClick={()=>addToBasketHandler(product)} className="btn essence-btn">
+                      اضافه به سبد خرید
+                    </button>
                   </div>
                 </div>
               </div>

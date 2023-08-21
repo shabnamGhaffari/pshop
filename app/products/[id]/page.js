@@ -7,9 +7,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {shopAxios} from "../../../axios/shopAxios";
+import {useDispatch} from "react-redux";
+import {addToBasket} from "../../../redux/slices/basketSlice";
 const product = ({params}) => {
   const productId = params?.id;
   const [productDetail, setProductDetail] = useState(null);
+  const dispatch = useDispatch();
   const getProductData = async () => {
     const response = await shopAxios.get(`/products/${productId}`);
     setProductDetail(response?.data?.data);
@@ -55,6 +58,9 @@ const product = ({params}) => {
       },
     ],
   };
+  const addToBasketHandler = item => {
+    dispatch(addToBasket(item));
+  };
   return (
     <>
       {/* <div className="cart-bg-overlay"></div> */}
@@ -69,7 +75,6 @@ const product = ({params}) => {
 
         <div className="cart-content flex">
           {/* Cart List Area  */}
-       
 
           {/* Cart Summary  */}
           <div className="cart-amount-summary">
@@ -101,7 +106,9 @@ const product = ({params}) => {
         {/* Single Product Thumb  */}
         <div className="single_product_thumb mt-[-10px] sm:mt-[-20px] lg:mt-0 clearfix">
           <Slider {...settings}>
-            {productDetail?.images?.map(img=>(<img src={img["image_path"]} alt={img.image_name} />))}
+            {productDetail?.images?.map(img => (
+              <img src={img["image_path"]} alt={img.image_name} />
+            ))}
           </Slider>
         </div>
         {/* Single Product Description  */}
@@ -112,45 +119,41 @@ const product = ({params}) => {
           </a>
           <p className="product-price">
             {/* <span className="old-price">$65.00</span> */}
-             {productDetail?.price}تومان  
+            {productDetail?.price}تومان
           </p>
-          <p className="product-desc">
-           {productDetail?.description}
-          </p>
+          <p className="product-desc">{productDetail?.description}</p>
 
           {/* Form  */}
-          <form className="cart-form clearfix" method="post">
-            {/* Select Box  */}
-            <div className="select-box d-flex mt-50 mb-30">
-              <select name="select" id="productSize" className="mr-5">
-                <option value="value">Size: XL</option>
-                <option value="value">Size: X</option>
-                <option value="value">Size: M</option>
-                <option value="value">Size: S</option>
-              </select>
-              <select name="select" id="productColor">
-                <option value="value">Color: Black</option>
-                <option value="value">Color: White</option>
-                <option value="value">Color: Red</option>
-                <option value="value">Color: Purple</option>
-              </select>
-            </div>
-            {/* Cart & Favourite Box  */}
-            <div className="cart-fav-box flex gap-4 items-center">
-              {/* Cart  */}
-              <button
-                type="submit"
-                name="addtocart"
-                value="5"
-                className="btn essence-btn">
-                Add to cart
-              </button>
-              {/* Favourite  */}
-              {/* <div className="product-favourite ml-4"> */}
-              <MdFavoriteBorder size={25} />
-              {/* </div> */}
-            </div>
-          </form>
+
+          {/* Select Box  */}
+          <div className="select-box d-flex mt-50 mb-30">
+            <select name="select" id="productSize" className="mr-5">
+              <option value="value">Size: XL</option>
+              <option value="value">Size: X</option>
+              <option value="value">Size: M</option>
+              <option value="value">Size: S</option>
+            </select>
+            <select name="select" id="productColor">
+              <option value="value">Color: Black</option>
+              <option value="value">Color: White</option>
+              <option value="value">Color: Red</option>
+              <option value="value">Color: Purple</option>
+            </select>
+          </div>
+          {/* Cart & Favourite Box  */}
+          <div className="cart-fav-box flex gap-4 items-center">
+            {/* Cart  */}
+            <button
+              onClick={() => addToBasketHandler(productDetail)}
+              name="addtocart"
+              className="btn essence-btn">
+              اضافه به سبد خرید
+            </button>
+            {/* Favourite  */}
+            {/* <div className="product-favourite ml-4"> */}
+            <MdFavoriteBorder size={25} />
+            {/* </div> */}
+          </div>
         </div>
       </section>
     </>

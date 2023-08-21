@@ -3,9 +3,10 @@ import Pagination from "rc-pagination";
 import React, {useEffect, useState} from "react";
 import {shopAxios} from "../../../axios/shopAxios";
 import "../../products/pagination.css";
-
+import {addToBasket} from "../../../redux/slices/basketSlice"
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 const Tags = ({params}) => {
   const [showSubItems, setShowSubItems] = useState(false);
   const [total, setTotal] = useState(null);
@@ -13,6 +14,7 @@ const Tags = ({params}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(null);
   const tagId = params?.id;
+  const dispatch=useDispatch()
   const onPageChange = page => {
     setCurrentPage(page);
   };
@@ -41,6 +43,9 @@ const Tags = ({params}) => {
     }
     setCurrentPage(currentPage - 1);
   };
+  const addToBasketHandler=(item)=>{
+    dispatch(addToBasket(item))
+  }
   return (
     <section className="shop_grid_area section-padding-80">
       <div className="container flex flex-col md:flex-row mx-auto px-8 lg:px-32">
@@ -105,9 +110,9 @@ const Tags = ({params}) => {
                     <div className="hover-content">
                       {/* Add to Cart  */}
                       <div className="add-to-cart-btn">
-                        <a href="#" className="btn essence-btn text-center">
+                        <button onClick={()=>addToBasketHandler(item)} className="btn essence-btn text-center">
                           اضافه به سبد خرید
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
