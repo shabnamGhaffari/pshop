@@ -1,8 +1,16 @@
 "use client";
 import Link from "next/link";
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AiOutlinePlusSquare} from "react-icons/ai"
+import { AiOutlineMinusSquare } from "react-icons/ai";
+import {RiDeleteBin2Line} from "react-icons/ri"
+import { addToBasket, decrementAmount,removeFromBasket } from "../../redux/slices/basketSlice";
 
 const UserInfo = () => {
+  const basketProductList = useSelector(state => state.basketReducer.items);
+  const dispatch=useDispatch();
+  console.log(basketProductList);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -21,6 +29,16 @@ const UserInfo = () => {
       setUserInfo({...userInfo, [e.target.name]: e.target.value});
     }
   };
+  const addToBasketHanlder=(product)=>{
+    dispatch(addToBasket(product))
+  }
+  const decrementAmountHandler=(product)=>{
+    console.log(product);
+    dispatch(decrementAmount(product))
+  }
+  const removeHandler=(product)=>{
+    dispatch(removeFromBasket(product))
+  }
   return (
     <>
       <div
@@ -195,12 +213,18 @@ const UserInfo = () => {
             <p>جزئیات</p>
           </div>
           <ul class="order-details-form flex flex-col justify-between">
-            <li>
-              <span>محصول</span> <span>مبلغ</span>
+            <li className="inline-flex justify-between">
+              <div className="w-[40%]">محصول</div>
+              <div>مبلغ</div>
             </li>
-            <li>
-              <span>Cocktail Yellow dress</span> <span>$59.90</span>
-            </li>
+            {basketProductList?.map(product => (
+              <li className="inline-flex justify-between">
+                <div className="w-[40%]">{product.name}</div>
+                <div className="flex justify-between items-center"><AiOutlinePlusSquare size={20} cursor="pointer" color="navy" onClick={()=>addToBasketHanlder(product)}/><div className="w-[25px] text-[14px] text-center">{product.count}</div><AiOutlineMinusSquare size={20} cursor="pointer" color="navy" onClick={()=>decrementAmountHandler(product)}/></div>
+                <div title="حذف محصول"><RiDeleteBin2Line size={20} cursor="pointer" color="red" onClick={()=>removeHandler(product)}/></div>
+                <div>{product.price}</div>
+              </li>
+            ))}
             <li>
               <span>مبلغ خرید</span> <span>$59.90</span>
             </li>
@@ -211,138 +235,6 @@ const UserInfo = () => {
               <span>مبلغ کل</span> <span>$59.90</span>
             </li>
           </ul>
-
-          {/* <div id="accordion" role="tablist" class="mb-4">
-            <div class="card">
-              <div class="card-header" role="tab" id="headingOne">
-                <h6 class="mb-0">
-                  <a
-                    data-toggle="collapse"
-                    href="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne">
-                    <i class="fa fa-circle-o mr-3"></i>Paypal
-                  </a>
-                </h6>
-              </div>
-
-              <div
-                id="collapseOne"
-                class="collapse"
-                role="tabpanel"
-                aria-labelledby="headingOne"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Proin pharetra tempor so dales. Phasellus sagittis auctor
-                    gravida. Integ er bibendum sodales arcu id te mpus. Ut
-                    consectetur lacus.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" role="tab" id="headingTwo">
-                <h6 class="mb-0">
-                  <a
-                    class="collapsed"
-                    data-toggle="collapse"
-                    href="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo">
-                    <i class="fa fa-circle-o mr-3"></i>cash on delievery
-                  </a>
-                </h6>
-              </div>
-              <div
-                id="collapseTwo"
-                class="collapse"
-                role="tabpanel"
-                aria-labelledby="headingTwo"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Explicabo quis in veritatis officia inventore, tempore
-                    provident dignissimos.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" role="tab" id="headingThree">
-                <h6 class="mb-0">
-                  <a
-                    class="collapsed"
-                    data-toggle="collapse"
-                    href="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree">
-                    <i class="fa fa-circle-o mr-3"></i>credit card
-                  </a>
-                </h6>
-              </div>
-              <div
-                id="collapseThree"
-                class="collapse"
-                role="tabpanel"
-                aria-labelledby="headingThree"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Esse quo sint repudiandae suscipit ab soluta delectus
-                    voluptate, vero vitae
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" role="tab" id="headingFour">
-                <h6 class="mb-0">
-                  <a
-                    class="collapsed"
-                    data-toggle="collapse"
-                    href="#collapseFour"
-                    aria-expanded="true"
-                    aria-controls="collapseFour">
-                    <i class="fa fa-circle-o mr-3"></i>direct bank transfer
-                  </a>
-                </h6>
-              </div>
-              <div
-                id="collapseFour"
-                class="collapse show"
-                role="tabpanel"
-                aria-labelledby="headingThree"
-                data-parent="#accordion">
-                <div class="card-body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Est cum autem eveniet saepe fugit, impedit magni.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-          {/* <Link
-            href="#"
-            className={`btn essence-btn w-32 ${
-              !userInfo.firstName ||
-              !userInfo.lastName ||
-              !userInfo.province ||
-              !userInfo.city ||
-              !userInfo.address ||
-              !userInfo.postalCode ||
-              !userInfo.mobile ||
-              !userInfo.policy
-                ? "cursor-not-allowed"
-                : "cursor-pointer"
-            }`}>
-            پرداخت آنلاین
-          </Link> */}
           <button
             type="button"
             className="mt-10 lg:mt-0 text-red-700 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
@@ -356,7 +248,6 @@ const UserInfo = () => {
               !userInfo.mobile ||
               !userInfo.policy
             }>
-            {" "}
             پرداخت آنلاین
           </button>
         </div>

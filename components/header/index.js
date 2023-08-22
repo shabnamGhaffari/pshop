@@ -85,7 +85,7 @@ export default function Header() {
               </Link>
             </div>
             {/* Cart Area */}
-            <Link href="/" className="md:w-20 flex items-center justify-center">
+            <Link href="/basket" className="md:w-20 flex items-center justify-center">
               <CgShoppingCart size={25} />{" "}
               <span className="absolute left-[26px] top-[32px]  md:left-[60px] md:top-[20px] text-xs">
                 {count}

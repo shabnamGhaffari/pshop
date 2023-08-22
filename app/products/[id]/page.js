@@ -16,6 +16,7 @@ const product = ({params}) => {
   const getProductData = async () => {
     const response = await shopAxios.get(`/products/${productId}`);
     setProductDetail(response?.data?.data);
+console.log(response?.data?.data);
   };
   useEffect(() => {
     getProductData();
@@ -114,9 +115,7 @@ const product = ({params}) => {
         {/* Single Product Description  */}
         <div className="single_product_desc clearfix">
           <span>{productDetail?.brand?.name}</span>
-          <a href="cart.html">
-            <h2>{productDetail?.name}</h2>
-          </a>
+          <h2>{productDetail?.name}</h2>
           <div className="flex items-center gap-1">
             <p className="product-price">
               {/* <span className="old-price">$65.00</span> */}
@@ -132,16 +131,16 @@ const product = ({params}) => {
           {/* Select Box  */}
           <div className="select-box d-flex mt-50 mb-30">
             <select name="select" id="productSize" className="mr-5">
-              <option value="value">Size: XL</option>
-              <option value="value">Size: X</option>
-              <option value="value">Size: M</option>
-              <option value="value">Size: S</option>
+              <option value="value">سایز: XL</option>
+              <option value="value">سایز: X</option>
+              <option value="value">سایز M</option>
+              <option value="value">سایز: S</option>
             </select>
             <select name="select" id="productColor">
-              <option value="value">Color: Black</option>
-              <option value="value">Color: White</option>
-              <option value="value">Color: Red</option>
-              <option value="value">Color: Purple</option>
+              <option value="value">رنگ: Black</option>
+              <option value="value">رنگ: White</option>
+              <option value="value">رنگ: Red</option>
+              <option value="value">رنگ: Purple</option>
             </select>
           </div>
           {/* Cart & Favourite Box  */}
@@ -155,7 +154,7 @@ const product = ({params}) => {
             </button>
             {/* Favourite  */}
             {/* <div className="product-favourite ml-4"> */}
-            <MdFavoriteBorder size={25} />
+            {/* <MdFavoriteBorder size={25} /> */}
             {/* </div> */}
           </div>
         </div>

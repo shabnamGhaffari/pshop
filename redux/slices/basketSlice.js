@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
   count: 0,
   items: [],
-  totalAmount: 0,
+  totalPrice: 0,
 };
 
 export const basket = createSlice({
@@ -11,10 +11,15 @@ export const basket = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    addToBasket: (state,action) => {
+    addToBasket: (state, action) => {
       state.count += 1;
-      const itemFounded = state.items?.find(item => item?.id === action.payload.id);
-      const itemFoundedIndex = state.items.findIndex(item => item.id === action.payload.id);
+      state.totalPrice += action.payload.price;
+      const itemFounded = state.items?.find(
+        item => item?.id === action.payload.id
+      );
+      const itemFoundedIndex = state.items.findIndex(
+        item => item.id === action.payload.id
+      );
       if (itemFounded) {
         itemFounded.count += 1;
         itemFounded.totalPrice += itemFounded.price;
@@ -25,12 +30,30 @@ export const basket = createSlice({
           count: 1,
           totalPrice: action.payload?.price,
         };
-        console.log(formattedProduct);
         state.items.push(formattedProduct);
       }
     },
-    decrement: state => {
+    decrementAmount: (state, action) => {
       state.count -= 1;
+      console.log(state.count);
+      state.totalPrice -= action.payload.price;
+      const itemFounded = state.items?.find(
+        item => item?.id === action.payload.id
+      );
+      const itemFoundedIndex = state.items.findIndex(
+        item => item.id === action.payload.id
+      );
+      itemFounded.count -= 1;
+      itemFounded.totalPrice -= itemFounded.price;
+      state.items[itemFoundedIndex] = itemFounded;
+    },
+    removeFromBasket: (state, action) => {
+      const removedProductCount = action.payload.count;
+      const removedProductPrice = action.payload.price;
+      state.count -= removedProductCount;
+      state.totalPrice -=
+        Number(removedProductCount) * Number(removedProductPrice);
+      state.items = state.items.filter(item => item.id !== action.payload.id);
     },
     incrementByAmount: (state, action) => {
       state.count += action.payload;
@@ -44,8 +67,8 @@ export const basket = createSlice({
 export const {
   addToBasket,
   incrementByAmount,
-  decrement,
-  decrementByAmount,
+  decrementAmount,
+  removeFromBasket,
   reset,
 } = basket.actions;
 export default basket.reducer;
