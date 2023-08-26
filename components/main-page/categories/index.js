@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {shopAxios} from "../../../axios/shopAxios";
 
@@ -20,7 +21,7 @@ const MainCategories = () => {
               className="single_catagory_area flex items-center justify-center bg-img"
               style={{"background-image": `url(${tag?.image_path})`}}>
               <div className="catagory-content">
-                <a href={`/tags/${tag?.id}`}>{tag?.name}</a>
+                <Link href={`/tags/${tag?.id}`}>{tag?.name}</Link>
               </div>
             </div>
           ))}

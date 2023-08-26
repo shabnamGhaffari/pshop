@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Banner = () => {
   return (
     //    Welcome Area Start #####
@@ -8,9 +10,9 @@ const Banner = () => {
         <div className="hero-content">
           {/* <h6>asoss</h6> */}
           <h2>New Collection</h2>
-          <a href="#" className="btn essence-btn">
+          <Link href="/products" className="btn essence-btn">
             مشاهده کالکشن 
-          </a>
+          </Link>
         </div>
       </div>
     </section>

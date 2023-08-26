@@ -78,28 +78,6 @@ console.log(response?.data?.data);
           {/* Cart List Area  */}
 
           {/* Cart Summary  */}
-          <div className="cart-amount-summary">
-            <h2>Summary</h2>
-            <ul className="summary-table">
-              <li>
-                <span>subtotal:</span> <span>$274.00</span>
-              </li>
-              <li>
-                <span>delivery:</span> <span>Free</span>
-              </li>
-              <li>
-                <span>discount:</span> <span>-15%</span>
-              </li>
-              <li>
-                <span>total:</span> <span>$232.00</span>
-              </li>
-            </ul>
-            <div className="checkout-btn mt-100">
-              <a href="checkout.html" className="btn essence-btn">
-                check out
-              </a>
-            </div>
-          </div>
         </div>
       </div>
 

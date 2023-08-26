@@ -3,10 +3,10 @@ import Pagination from "rc-pagination";
 import React, {useEffect, useState} from "react";
 import {shopAxios} from "../../../axios/shopAxios";
 import "../../products/pagination.css";
-import {addToBasket} from "../../../redux/slices/basketSlice"
+import {addToBasket} from "../../../redux/slices/basketSlice";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 const Categories = ({params}) => {
   const [showSubItems, setShowSubItems] = useState(false);
   const [total, setTotal] = useState(null);
@@ -14,7 +14,7 @@ const Categories = ({params}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(null);
   const categoryId = params?.id;
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const onPageChange = page => {
     setCurrentPage(page);
   };
@@ -43,9 +43,9 @@ const Categories = ({params}) => {
     }
     setCurrentPage(currentPage - 1);
   };
-  const addToBasketHandler=(item)=>{
-    dispatch(addToBasket(item))
-  }
+  const addToBasketHandler = item => {
+    dispatch(addToBasket(item));
+  };
   return (
     <section className="shop_grid_area section-padding-80">
       <div className="container flex flex-col md:flex-row mx-auto px-8 lg:px-32">
@@ -93,23 +93,12 @@ const Categories = ({params}) => {
                       src={item?.images[1]["image_path"]}
                       alt={item?.images[1]["image_name"]}
                     />
-
-                    {/* Product Badge  */}
-                    {/* <div className="product-badge offer-badge">
-                      <span>-30%</span>
-                    </div> */}
-                    {/* Favourite  */}
-                    {/* <div className="product-favourite">
-                      <a href="#" className="favme fa fa-heart"></a>
-                    </div> */}
                   </div>
 
                   {/* Product Description */}
                   <div className="product-description">
                     <span>{item?.manufacturer?.name}</span>
-                    <a href="single-product-details.html">
-                      <h6>{item?.name}</h6>
-                    </a>
+                    <h6>{item?.name}</h6>
                     <p className="product-price">
                       {/* <span className="old-price">$75.00</span> */}
                       {item?.price}
@@ -119,7 +108,9 @@ const Categories = ({params}) => {
                     <div className="hover-content">
                       {/* Add to Cart  */}
                       <div className="add-to-cart-btn">
-                        <button onClick={()=>addToBasketHandler(item)} className="btn essence-btn text-center">
+                        <button
+                          onClick={() => addToBasketHandler(item)}
+                          className="btn essence-btn text-center">
                           اضافه به سبد خرید
                         </button>
                       </div>

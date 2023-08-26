@@ -1,9 +1,27 @@
 import {createSlice} from "@reduxjs/toolkit";
+const items =
+  localStorage.getItem("cartList") !== null
+    ? JSON.parse(localStorage.getItem("cartList"))
+    : [];
+const totalAmount =
+  localStorage.getItem("cartTotal") !== null
+    ? JSON.parse(localStorage.getItem("cartTotal"))
+    : 0;
+const totalQuantity =
+  localStorage.getItem("cartQuantity") !== null
+    ? JSON.parse(localStorage.getItem("cartQuantity"))
+    : 0;
 
+// adding this function to prevent repear code
+const setCartListFunc = (items, totalAmount, totalQuantity) => {
+  localStorage.setItem("cartList", JSON.stringify(items));
+  localStorage.setItem("cartTotal", JSON.stringify(totalAmount));
+  localStorage.setItem("cartQuantity", JSON.stringify(totalQuantity));
+};
 const initialState = {
-  count: 0,
-  items: [],
-  totalPrice: 0,
+  count: totalQuantity,
+  items: items,
+  totalPrice: totalAmount,
 };
 
 export const basket = createSlice({
@@ -13,7 +31,7 @@ export const basket = createSlice({
     reset: () => initialState,
     addToBasket: (state, action) => {
       state.count += 1;
-      state.totalPrice += action.payload.price;
+      state.totalPrice += Number(action.payload.price);
       const itemFounded = state.items?.find(
         item => item?.id === action.payload.id
       );
@@ -22,16 +40,21 @@ export const basket = createSlice({
       );
       if (itemFounded) {
         itemFounded.count += 1;
-        itemFounded.totalPrice += itemFounded.price;
+        itemFounded.totalPrice += Number(itemFounded.price);
         state.items[itemFoundedIndex] = itemFounded;
       } else {
         const formattedProduct = {
           ...action.payload,
           count: 1,
-          totalPrice: action.payload?.price,
+          totalPrice: Number(action.payload?.price),
         };
         state.items.push(formattedProduct);
       }
+      setCartListFunc(
+        state.items.map(item => item),
+        state.totalPrice,
+        state.count
+      );
     },
     decrementAmount: (state, action) => {
       state.count -= 1;
@@ -44,8 +67,13 @@ export const basket = createSlice({
         item => item.id === action.payload.id
       );
       itemFounded.count -= 1;
-      itemFounded.totalPrice -= itemFounded.price;
+      itemFounded.totalPrice -= Number(itemFounded.price);
       state.items[itemFoundedIndex] = itemFounded;
+      setCartListFunc(
+        state.items.map(item => item),
+        state.totalPrice,
+        state.count
+      );
     },
     removeFromBasket: (state, action) => {
       const removedProductCount = action.payload.count;
@@ -54,21 +82,15 @@ export const basket = createSlice({
       state.totalPrice -=
         Number(removedProductCount) * Number(removedProductPrice);
       state.items = state.items.filter(item => item.id !== action.payload.id);
-    },
-    incrementByAmount: (state, action) => {
-      state.count += action.payload;
-    },
-    decrementByAmount: (state, action) => {
-      state.count -= action.payload;
+      setCartListFunc(
+        state.items.map(item => item),
+        state.totalPrice,
+        state.count
+      );
     },
   },
 });
 
-export const {
-  addToBasket,
-  incrementByAmount,
-  decrementAmount,
-  removeFromBasket,
-  reset,
-} = basket.actions;
+export const {addToBasket, decrementAmount, removeFromBasket, reset} =
+  basket.actions;
 export default basket.reducer;
