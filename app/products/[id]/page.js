@@ -12,11 +12,14 @@ import {addToBasket} from "../../../redux/slices/basketSlice";
 const product = ({params}) => {
   const productId = params?.id;
   const [productDetail, setProductDetail] = useState(null);
+  const [color, setColor] = useState(null);
+  const [sizeList, setSizeList] = useState([]);
+  const [size, setSize] = useState(null);
   const dispatch = useDispatch();
   const getProductData = async () => {
     const response = await shopAxios.get(`/products/${productId}`);
     setProductDetail(response?.data?.data);
-console.log(response?.data?.data);
+    console.log(response);
   };
   useEffect(() => {
     getProductData();
@@ -61,6 +64,19 @@ console.log(response?.data?.data);
   };
   const addToBasketHandler = item => {
     dispatch(addToBasket(item));
+  };
+  const handleChangeColor = e => {
+    const selectedColorId = e.target.value;
+    setColor(selectedColorId);
+    const subProduct = productDetail?.sub_products_details?.find(
+      item => item.color_id == selectedColorId
+    );
+    const sizes = subProduct?.sizes;
+    console.log(sizes);
+    setSizeList(sizes);
+  };
+  const handleChangeSize = e => {
+    setSize(e.target.value);
   };
   return (
     <>
@@ -107,33 +123,56 @@ console.log(response?.data?.data);
           {/* Form  */}
 
           {/* Select Box  */}
-          <div className="select-box d-flex mt-50 mb-30">
-            <select name="select" id="productSize" className="mr-5">
-              <option value="value">سایز: XL</option>
-              <option value="value">سایز: X</option>
-              <option value="value">سایز M</option>
-              <option value="value">سایز: S</option>
-            </select>
-            <select name="select" id="productColor">
-              <option value="value">رنگ: Black</option>
-              <option value="value">رنگ: White</option>
-              <option value="value">رنگ: Red</option>
-              <option value="value">رنگ: Purple</option>
-            </select>
+          <div className="select-box flex mt-50 mb-30 gap-12">
+            <div className="flex items-center gap-1">
+              <label for="productColor">رنگ</label>
+              <select
+                name="select"
+                id="productColor"
+                value={color}
+                onChange={handleChangeColor}>
+                <option
+                  defaultValue
+                  value={null}
+                  style={{display: "none"}}></option>
+                {productDetail?.sub_products_details?.map(subProduct => (
+                  <option
+                    key={subProduct?.color_id}
+                    value={subProduct?.color_id}>
+                    {subProduct?.color_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-1">
+              <label for="productSize">سایز</label>
+              <select
+                name="select"
+                id="productSize"
+                className="mr-5"
+                value={size}
+                onChange={handleChangeSize}>
+                <option
+                  defaultValue
+                  value={null}
+                  style={{display: "none"}}></option>
+                {sizeList?.map(size => (
+                  <option key={size.size_id} value={size.size_id}>
+                    {size.size_name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          {/* Cart & Favourite Box  */}
           <div className="cart-fav-box flex gap-4 items-center">
             {/* Cart  */}
             <button
+              disabled={!color || !size}
               onClick={() => addToBasketHandler(productDetail)}
               name="addtocart"
               className="btn essence-btn">
               اضافه به سبد خرید
             </button>
-            {/* Favourite  */}
-            {/* <div className="product-favourite ml-4"> */}
-            {/* <MdFavoriteBorder size={25} /> */}
-            {/* </div> */}
           </div>
         </div>
       </section>

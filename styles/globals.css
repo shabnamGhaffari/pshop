@@ -298,7 +298,10 @@ img {
     right: 30px;
   }
 }
-
+.btn.essence-btn :disabled,.btn.essence-btn[disabled]{
+  cursor:not-allowed;
+  background-color: #ededed;
+}
 /* Essence Button */
 .essence-btn {
   display: inline-block;
@@ -320,6 +323,7 @@ img {
   color: #ffffff;
   background-color: #dc0345;
 }
+
 
 /* :: 4.0 Header Area CSS */
 .header_area {
