@@ -13,6 +13,7 @@ import {
 
 const UserInfo = () => {
   const basketProductList = useSelector(state => state.basketReducer.items);
+  console.log(basketProductList);
   const basketTotalPrice = useSelector(state => state.basketReducer.totalPrice);
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({

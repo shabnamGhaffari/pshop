@@ -57,15 +57,26 @@ export const basket = createSlice({
       );
     },
     decrementAmount: (state, action) => {
-      state.count -= 1;
-      console.log(state.count);
-      state.totalPrice -= action.payload.price;
       const itemFounded = state.items?.find(
         item => item?.id === action.payload.id
       );
       const itemFoundedIndex = state.items.findIndex(
         item => item.id === action.payload.id
       );
+
+      state.count -= 1;
+      state.totalPrice -= action.payload.price;
+      if (action.payload.count === 1) {
+        state.items = state.items.filter(
+          item => item?.id !== action.payload.id
+        );
+        setCartListFunc(
+          state.items.map(item => item),
+          state.totalPrice,
+          state.count
+        );
+        return;
+      }
       itemFounded.count -= 1;
       itemFounded.totalPrice -= Number(itemFounded.price);
       state.items[itemFoundedIndex] = itemFounded;
