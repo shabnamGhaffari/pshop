@@ -228,7 +228,13 @@ const UserInfo = () => {
             </li>
             {basketProductList?.map(product => (
               <li className="inline-flex justify-between">
-                <div className="w-[40%]">{product.name}</div>
+                <div className="w-[40%] flex justify-start">
+                  <div className="w-[70%]">{product.name}</div>
+                  <div className="flex justify-between w-[30%]">
+                    <div>{product.selected_color_name}</div>
+                    <div>{product.selected_size_name}</div>
+                  </div>
+                </div>
                 <div className="flex justify-between items-center">
                   <AiOutlinePlusSquare
                     size={20}

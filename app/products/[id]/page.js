@@ -17,6 +17,8 @@ const product = ({params}) => {
   const [size, setSize] = useState(null);
   const [sizeObj, setSizeObj] = useState(null);
   const [quantity, setQuantity] = useState(null);
+  const [selectedSubProduct, setSelectedSubProduct] = useState(null);
+  const [subproductPrice, setSubproductPrice] = useState(null);
   const dispatch = useDispatch();
   const getProductData = async () => {
     const response = await shopAxios.get(`/products/${productId}`);
@@ -87,14 +89,22 @@ const product = ({params}) => {
     const subProduct = productDetail?.sub_products_details
       ?.find(item => item.color_id == color)
       ?.sizes?.find(item => item?.size_id == sizeId);
-    setSizeObj({selected_size_id: subProduct.size_id, selected_size_name: subProduct.size_name});
+    setSizeObj({
+      selected_size_id: subProduct.size_id,
+      selected_size_name: subProduct.size_name,
+    });
   };
   const getProductQty = () => {
     if (!color || !size) return;
-    const qty = productDetail?.sub_products_details
-      .find(item => item.color_id === color)
-      ?.sizes?.find(item => item.size_id === size)?.sub_products[0]?.quantity;
+    const selectedSubProduct = productDetail?.sub_products_details
+      ?.find(item => item.color_id == color)
+      ?.sizes?.find(item => item.size_id == size)?.sub_products[0];
+    const qty = selectedSubProduct?.quantity;
+    const price = selectedSubProduct?.price;
+    const selectedSubProductId = selectedSubProduct?.id;
+    setSubproductPrice(price);
     setQuantity(qty);
+    setSelectedSubProduct(selectedSubProductId);
   };
   useEffect(() => {
     getProductQty();
@@ -134,7 +144,7 @@ const product = ({params}) => {
           <div className="flex items-center gap-1">
             <p className="product-price">
               {/* <span className="old-price">$65.00</span> */}
-              {productDetail?.price}
+              {!color || !size ? productDetail?.price : subproductPrice}
             </p>
             <div>تومان</div>
           </div>
@@ -199,7 +209,12 @@ const product = ({params}) => {
             <button
               disabled={!color || !size || quantity === 0}
               onClick={() =>
-                addToBasketHandler({...productDetail, ...colorObj, ...sizeObj})
+                addToBasketHandler({
+                  ...productDetail,
+                  ...colorObj,
+                  ...sizeObj,
+                  selectedSubProduct,
+                })
               }
               name="addtocart"
               className="btn essence-btn">

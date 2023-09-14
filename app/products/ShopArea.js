@@ -278,7 +278,7 @@ const ShopArea = () => {
                       {/* Add to Cart  */}
                       <div className="add-to-cart-btn">
                         <button
-                          onClick={() => addToBasketHandler(item)}
+                          // onClick={() => addToBasketHandler(item)}
                           className="btn essence-btn text-center">
                           اضافه به سبد خرید
                         </button>

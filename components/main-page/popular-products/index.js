@@ -87,7 +87,7 @@ const PopularProducts = () => {
                 <div className="hover-content">
                   <div className="add-to-cart-btn">
                     <button
-                      onClick={() => addToBasketHandler(product)}
+                      // onClick={() => addToBasketHandler(product)}
                       className="btn essence-btn">
                       اضافه به سبد خرید
                     </button>
