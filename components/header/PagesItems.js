@@ -9,7 +9,7 @@ const PagesItems = props => {
         onMouseEnter={openPagesHandlerChildren}
       
       className={`absolute  z-10  h-fit w-[100px] ${
-        isPagesOpen ? "top-[50px] opacity-1" : "top-[100px] opacity-0"
+        isPagesOpen ? "top-[50px] opacity-1" : "top-[100px] opacity-0 hidden"
       }`}>
       <div 
       onMouseLeave={closePagesHandlerChildren}
@@ -31,16 +31,6 @@ const PagesItems = props => {
             className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
             تماس با ما
           </Link>
-          {/* <Link
-            href="/"
-            className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            4
-          </Link>
-          <Link
-            href="/"
-            className="text-gray-medium hover:text-black font-thin hover:font-thin p-2">
-            5
-          </Link> */}
         </div>
       </div>
     </div>

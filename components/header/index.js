@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {CgShoppingCart} from "react-icons/cg";
 import {HiOutlineUser} from "react-icons/hi";
 import {MdFavoriteBorder} from "react-icons/md";
@@ -6,15 +6,16 @@ import {CgSearch} from "react-icons/cg";
 import MenuContainer from "./MenuContainer";
 import MenuItems from "./MenuItems";
 import HamburgerMenu from "./HamburgerMenu";
-import { useState } from "react";
+import {useState} from "react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../redux/slices/authSlice";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showChildren, setShowChildren] = useState(false);
   const [isHamburgurMenuOpen, setIsHamburgurMenuOpen] = useState(false);
-
+  const {firstName, lastName} = useSelector(state => state.authReducer);
   const openShopHandler = () => {
     setIsMenuOpen(true);
     setShowChildren(true);
@@ -39,9 +40,11 @@ export default function Header() {
   const closeHabmurgurMenu = () => {
     setIsHamburgurMenuOpen(false);
   };
-  const count = useSelector((state) => state.basketReducer.count);
+  const count = useSelector(state => state.basketReducer.count);
   const dispatch = useDispatch();
-
+  const logOutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <>
       <header className="fixed top-0 left-0 right-0 w-full shadow md:h-20 px-2 z-[10000] bg-white">
@@ -74,18 +77,45 @@ export default function Header() {
             </div>
             {/* Favourite Area */}
             <div className="md:w-20 flex items-center justify-center">
-              <Link href="#">
+              <Link href="/">
                 <MdFavoriteBorder size={25} />
               </Link>
             </div>
             {/* User Login Info */}
             <div className="md:w-20 flex items-center justify-center">
-              <Link href="#">
+              <Link href="/login">
                 <HiOutlineUser size={25} />
               </Link>
             </div>
+
+            <button
+              data-ripple-light="true"
+              data-popover-target="menu"
+              class="middle none center rounded-lg text-xs font-bold uppercase active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+              <HiOutlineUser size={25} />
+            </button>
+            <ul
+              role="menu"
+              data-popover="menu"
+              data-popover-placement="right"
+              class="absolute z-10  top-[50px] min-w-[150px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+              <li
+                role="menuitem"
+                class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                {firstName} {lastName}
+              </li>
+              <li
+                onclick={logOutHandler}
+                role="menuitem"
+                class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                خروج
+              </li>
+            </ul>
+
             {/* Cart Area */}
-            <Link href="/basket" className="md:w-20 flex items-center justify-center">
+            <Link
+              href="/basket"
+              className="md:w-20 flex items-center justify-center">
               <CgShoppingCart size={25} />{" "}
               <span className="absolute left-[26px] top-[32px]  md:left-[60px] md:top-[20px] text-xs">
                 {count}
