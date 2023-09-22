@@ -14,8 +14,10 @@ import {logout} from "../../redux/slices/authSlice";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showChildren, setShowChildren] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const [isHamburgurMenuOpen, setIsHamburgurMenuOpen] = useState(false);
   const {firstName, lastName} = useSelector(state => state.authReducer);
+  const isAuth = useSelector(state => state.authReducer.isAuth);
   const openShopHandler = () => {
     setIsMenuOpen(true);
     setShowChildren(true);
@@ -44,6 +46,12 @@ export default function Header() {
   const dispatch = useDispatch();
   const logOutHandler = () => {
     dispatch(logout());
+  };
+  const openUserMenu = () => {
+    if (!isAuth) {
+      return;
+    }
+    setShowUserMenu(!showUserMenu);
   };
   return (
     <>
@@ -82,35 +90,38 @@ export default function Header() {
               </Link>
             </div>
             {/* User Login Info */}
-            <div className="md:w-20 flex items-center justify-center">
+            {/* <div className="md:w-20 flex items-center justify-center">
               <Link href="/login">
                 <HiOutlineUser size={25} />
               </Link>
-            </div>
+            </div> */}
 
             <button
               data-ripple-light="true"
               data-popover-target="menu"
+              onClick={openUserMenu}
               class="middle none center rounded-lg text-xs font-bold uppercase active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
               <HiOutlineUser size={25} />
             </button>
-            <ul
-              role="menu"
-              data-popover="menu"
-              data-popover-placement="right"
-              class="absolute z-10  top-[50px] min-w-[150px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
-              <li
-                role="menuitem"
-                class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                {firstName} {lastName}
-              </li>
-              <li
-                onclick={logOutHandler}
-                role="menuitem"
-                class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                خروج
-              </li>
-            </ul>
+            {showUserMenu && (
+              <ul
+                role="menu"
+                data-popover="menu"
+                data-popover-placement="right"
+                class="absolute z-10 left-[5px] sm:left-[84px] top-[65px] sm:top-[52px] min-w-[150px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+                <li
+                  role="menuitem"
+                  class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                  {firstName} {lastName}
+                </li>
+                <li
+                  onclick={logOutHandler}
+                  role="menuitem"
+                  class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                  خروج
+                </li>
+              </ul>
+            )}
 
             {/* Cart Area */}
             <Link
