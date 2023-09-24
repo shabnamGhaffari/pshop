@@ -7,7 +7,7 @@ const initialState = {
   
 };
 export const auth = createSlice({
-  name: "authentication",
+  name: "auth",
   initialState,
   reducers: {
     setAuth: (state, action) => {
@@ -18,7 +18,8 @@ export const auth = createSlice({
       state.lastName = action.payload.lastName;
       state.token=action.payload.token
     },
-    logout: (state, action) => {
+    logoutUser: (state, action) => {
+    
       localStorage.removeItem("access_token");
       localStorage.removeItem("first_name");
       localStorage.removeItem("last_name");
@@ -29,5 +30,5 @@ export const auth = createSlice({
   },
 });
 
-export const {setAuth, setUserData, logout} = auth.actions;
+export const {setAuth, setUserData, logoutUser} = auth.actions;
 export default auth.reducer;

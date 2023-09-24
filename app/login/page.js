@@ -1,4 +1,5 @@
 "use client";
+import {useRouter} from "next/navigation";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
@@ -8,7 +9,6 @@ import {setAuth, setUserData} from "../../redux/slices/authSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(state => state.authReducer.isAuth);
-  console.log(isAuth);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -24,6 +24,7 @@ const Login = () => {
   });
   const [loginInfo, setLoginInfo] = useState({email: "", password: ""});
   const [pay, setPay] = useState(null);
+  const router = useRouter();
   const handleChangePay = e => {
     setPay(e.target.value);
   };
@@ -67,11 +68,12 @@ const Login = () => {
       }
 
       toast.success("ورود با موفقیت انجام شد", {position: "bottom-right"});
+      router.replace("/user-addresses")
     } catch {}
   };
   return (
-    <div className="flex flex-col gap-12 p-12 lg:flex-row-reverse bg-[#babbf6]">
-      <div class="checkout_details_area p-12  sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
+    <div className="flex flex-col-reverse gap-12 p-2 sm:p-12 lg:flex-row-reverse bg-[#babbf6]">
+      <div class="checkout_details_area p-2 sm:p-12  sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
         <div className="mb-12 w-full flex text-lg justify-center font-bold">
           ثبت نام
         </div>
@@ -192,13 +194,13 @@ const Login = () => {
               !userInfo.policy
             }
             onClick={handleRegister}
-            className="mt-10 w-32 sm:w-52 justify-self-end bg-[#babbf6] disabled:text-[#babbf6]-700 disabled:cursor-not-allowed disabled:bg-[white] disabled:text-[#babbf6]-700  border border-[#babbf6]-700 bg-[#babbf6]-800 focus:ring-4 focus:outline-none focus:ring-[#babbf6]-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#babbf6]-500 dark:text-[#babbf6]-500 dark:hover:text-[#babbf6] dark:hover:bg-[#babbf6]-600 dark:focus:ring-[#babbf6]-900">
+            className="mt-10 w-full sm:w-52 justify-self-end bg-[#babbf6] disabled:text-[#babbf6]-700 disabled:cursor-not-allowed disabled:bg-[white] disabled:text-[#babbf6]-700  border border-[#babbf6]-700 bg-[#babbf6]-800 focus:ring-4 focus:outline-none focus:ring-[#babbf6]-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#babbf6]-500 dark:text-[#babbf6]-500 dark:hover:text-[#babbf6] dark:hover:bg-[#babbf6]-600 dark:focus:ring-[#babbf6]-900">
             ثبت نام
           </button>
         </div>
       </div>
       <div className="flex-[50%]">
-        <div class="checkout_details_area p-12 sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
+        <div class="checkout_details_area p-2 sm:p-12  sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
           <div className="mb-12 w-full flex text-lg justify-center font-bold">
             ورود
           </div>
@@ -288,7 +290,7 @@ const Login = () => {
             <button
               disabled={!loginInfo.email || !loginInfo.password}
               onClick={handleLogin}
-              className="mt-10 w-32 sm:w-52 justify-self-end bg-[#babbf6] disabled:text-[#babbf6]-700 disabled:cursor-not-allowed disabled:bg-[white] disabled:text-[#babbf6]-700  border border-[#babbf6]-700 bg-[#babbf6]-800 focus:ring-4 focus:outline-none focus:ring-[#babbf6]-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#babbf6]-500 dark:text-[#babbf6]-500 dark:hover:text-[#babbf6] dark:hover:bg-[#babbf6]-600 dark:focus:ring-[#babbf6]-900">
+              className="mt-10 w-full sm:w-52 justify-self-end bg-[#babbf6] disabled:text-[#babbf6]-700 disabled:cursor-not-allowed disabled:bg-[white] disabled:text-[#babbf6]-700  border border-[#babbf6]-700 bg-[#babbf6]-800 focus:ring-4 focus:outline-none focus:ring-[#babbf6]-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#babbf6]-500 dark:text-[#babbf6]-500 dark:hover:text-[#babbf6] dark:hover:bg-[#babbf6]-600 dark:focus:ring-[#babbf6]-900">
               ورود به حساب کاربری
             </button>
           </div>

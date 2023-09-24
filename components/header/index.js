@@ -9,7 +9,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import {useState} from "react";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../redux/slices/authSlice";
+import {logOut, logoutUser} from "../../redux/slices/authSlice";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +45,8 @@ export default function Header() {
   const count = useSelector(state => state.basketReducer.count);
   const dispatch = useDispatch();
   const logOutHandler = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
+    setShowUserMenu(false)
   };
   const openUserMenu = () => {
     if (!isAuth) {
@@ -115,7 +116,7 @@ export default function Header() {
                   {firstName} {lastName}
                 </li>
                 <li
-                  onclick={logOutHandler}
+                  onClick={logOutHandler}
                   role="menuitem"
                   class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                   خروج

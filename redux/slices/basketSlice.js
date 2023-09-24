@@ -12,7 +12,7 @@ const totalQuantity =
     ? JSON.parse(localStorage.getItem("cartQuantity"))
     : 0;
 
-// adding this function to prevent repear code
+
 const setCartListFunc = (items, totalAmount, totalQuantity) => {
   localStorage.setItem("cartList", JSON.stringify(items));
   localStorage.setItem("cartTotal", JSON.stringify(totalAmount));
