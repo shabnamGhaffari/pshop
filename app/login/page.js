@@ -63,7 +63,7 @@ const Login = () => {
         localStorage.setItem("first_name", firstName);
         localStorage.setItem("last_name", lastName);
         dispatch(setAuth());
-        dispatch(setUserData({firstName, lastName}));
+        dispatch(setUserData({firstName, lastName, token}));
       }
 
       toast.success("ورود با موفقیت انجام شد", {position: "bottom-right"});
@@ -108,58 +108,7 @@ const Login = () => {
               />
             </div>
           </div>
-          {/* <div className="flex flex-col">
-              <label for="state">
-                استان <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="province"
-                class="form-control"
-                id="state"
-                value={userInfo.province}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="city">
-                شهر <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="city"
-                class="form-control"
-                id="city"
-                value={userInfo.city}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="street_address">
-                آدرس <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="address"
-                className="form-control w-full"
-                id="street_address"
-                value={userInfo.address}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="postcode">
-                کد پستی <span>*</span>
-              </label>
-              <input
-                name="postalCode"
-                type="text"
-                class="form-control"
-                id="postcode"
-                value={userInfo.postalCode}
-                onChange={handleChange}
-              />
-            </div> */}
+
           <div className="flex flex-col">
             <label for="phone_number">
               شماره تماس <span>*</span>
