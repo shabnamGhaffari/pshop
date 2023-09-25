@@ -1,13 +1,25 @@
 import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
-  addressId: null,
+  addressId:  localStorage.getItem("address") !== null
+  ? JSON.parse(localStorage.getItem("address"))
+  : null
+};
+const setAddressFunc = (addressId) => {
+  localStorage.setItem("address", JSON.stringify(addressId));
 };
 export const address = createSlice({
   name: "address",
   initialState,
   reducers: {
     setUserAddress: (state, action) => {
-      state.addressId = action.payload;
+      if(action.payload.checked){
+        state.addressId = action.payload.value;
+        setAddressFunc(action.payload.value)
+      }
+      else{
+        state.addressId=null
+        setAddressFunc(null)
+      }
     },
   },
 });

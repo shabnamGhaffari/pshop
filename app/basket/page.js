@@ -20,8 +20,7 @@ const Basket = () => {
     dispatch(addToBasket(product));
   };
   const decrementAmountHandler = product => {
-    console.log(product);
-    dispatch(decrementAmount(product));
+       dispatch(decrementAmount(product));
   };
   const removeHandler = product => {
     dispatch(removeFromBasket(product));

@@ -71,34 +71,44 @@ const UserAddresses = () => {
       province_id: address?.province?.value,
       county_id: address.county?.value,
       address: address.address,
-      postal_code: Number(address.postalCode),
+      postal_code: String(address.postalCode),
     };
     try {
       const response = await AxiosWithToken.post("/user-addresses", formObj);
+      getUserAddresses();
+      setAddress(initialState);
     } catch {}
   };
   const selectAddress = e => {
-    dispatch(setUserAddress(e.target.value));
+    dispatch(
+      setUserAddress({value: e.target.value, checked: e.target.checked})
+    );
   };
+  const handleSubmit=()=>{
+    router.push("/booking")
+  }
   if (!isAuth) {
     router.replace("/login");
   } else {
     return (
       <div className="px:2 sm:px-32 py-8 flex flex-col items-center justify-center">
         <h1 className="text-center my-8">انتخاب آدرس</h1>
-        {addressList?.map(({province, county, address, postal_code, id}) => (
-          <div className="border flex rounded-xl p-4 w-full">
-            <input
-              type="checkbox"
-              name=""
-              value={id}
-              onChange={selectAddress}
-            />
-            <div>
-              {province}-{county}-{address}-{postal_code}
+        <div className="flex flex-col gap-2 w-full">
+          {addressList?.map(({province, county, address, postal_code, id}) => (
+            <div className="border flex  rounded-xl p-4 w-full gap-1">
+              <input
+                type="checkbox"
+                name=""
+                value={id}
+                onChange={selectAddress}
+                checked={addressId == id}
+              />
+              <div>
+                {province}-{county}-{address}-{postal_code}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <div className="flex-col-reverse flex sm:flex-row justify-between w-full ">
           <button
             onClick={addAddressHandler}
@@ -107,6 +117,7 @@ const UserAddresses = () => {
             <AiOutlinePlus />
           </button>
           <button
+            onClick={handleSubmit}
             disabled={!addressId}
             className="mt-10 flex items-center justify-between w-full sm:w-44 justify-self-end bg-[#babbf6] disabled:text-[#babbf6]-700 disabled:cursor-not-allowed disabled:bg-[white] disabled:text-[#babbf6]-700  border border-[#babbf6]-700 bg-[#babbf6]-800 focus:ring-4 focus:outline-none focus:ring-[#babbf6]-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#babbf6]-500 dark:text-[#babbf6]-500 dark:hover:text-[#babbf6] dark:hover:bg-[#babbf6]-600 dark:focus:ring-[#babbf6]-900">
             ادامه فرآیند خرید

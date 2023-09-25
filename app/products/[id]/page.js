@@ -161,6 +161,7 @@ const product = ({params}) => {
                 name="select"
                 id="productColor"
                 value={color}
+                className="p-2 rounded-md"
                 onChange={handleChangeColor}>
                 <option
                   defaultValue
@@ -180,7 +181,7 @@ const product = ({params}) => {
               <select
                 name="select"
                 id="productSize"
-                className="mr-5"
+                className="mr-5 p-2 rounded-md"
                 value={size}
                 onChange={handleChangeSize}>
                 <option
