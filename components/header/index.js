@@ -10,6 +10,7 @@ import {useState} from "react";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut, logoutUser} from "../../redux/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function Header() {
   const [isHamburgurMenuOpen, setIsHamburgurMenuOpen] = useState(false);
   const {firstName, lastName} = useSelector(state => state.authReducer);
   const isAuth = useSelector(state => state.authReducer.isAuth);
+  const router=useRouter()
   const openShopHandler = () => {
     setIsMenuOpen(true);
     setShowChildren(true);
@@ -50,6 +52,7 @@ export default function Header() {
   };
   const openUserMenu = () => {
     if (!isAuth) {
+      router.push("/login");
       return;
     }
     setShowUserMenu(!showUserMenu);

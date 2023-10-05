@@ -73,8 +73,8 @@ const PopularProducts = () => {
                 />
                 <img
                   className="hover-img"
-                  src={product?.images[1]["image_path"]}
-                  alt={product?.images[1]["image_name"]}
+                  src={product?.images[1]?.image_path}
+                  alt={product?.images[1]?.image_name}
                 />
               </Link>
               <div className="product-description text-right flex flex-col justify-between items-end">

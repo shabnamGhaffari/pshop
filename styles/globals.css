@@ -32,9 +32,9 @@
 
 @font-face {
   font-family: "vazir";
-  src: url("../assets/fonts/Vazir-Medium.ttf");
-  src: url("../assets/fonts//Vazir-Medium.woff");
-  src: url("../assets/fonts//Vazir-Medium.woff2");
+  src: url("../assets/fonts/Vazir-Medium-FD.ttf");
+  src: url("../assets/fonts/Vazir-Medium-FD.woff");
+  src: url("../assets/fonts/Vazir-Medium-FD.woff2");
 }
 * {
   margin: 0;

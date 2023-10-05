@@ -247,8 +247,8 @@ const ShopArea = () => {
                     {/* Hover Thumb  */}
                     <img
                       className="hover-img"
-                      src={item?.images[1]["image_path"]}
-                      alt={item?.images[1]["image_name"]}
+                      src={item?.images[1]?.image_path}
+                      alt={item?.images[1]?.image_name}
                     />
 
                     {/* Product Badge  */}

@@ -59,18 +59,26 @@ const Login = () => {
       const token = response?.data?.token;
       const firstName = response?.data?.user?.first_name;
       const lastName = response?.data?.user?.last_name;
+      const exp = response?.data?.expire_time;
       if (token) {
         localStorage.setItem("access_token", token);
         localStorage.setItem("first_name", firstName);
         localStorage.setItem("last_name", lastName);
+        localStorage.setItem("exp", exp);
         dispatch(setAuth());
-        dispatch(setUserData({firstName, lastName, token}));
+        dispatch(setUserData({firstName, lastName, token, exp}));
       }
-
       toast.success("ورود با موفقیت انجام شد", {position: "bottom-right"});
-      router.replace("/user-addresses")
+      setTimeout(() => {
+        router.back()
+        
+      }, 1000);
     } catch {}
   };
+  if(isAuth){
+    router.replace("/")
+  }
+  else{
   return (
     <div className="flex flex-col-reverse gap-12 p-2 sm:p-12 lg:flex-row-reverse bg-[#babbf6]">
       <div class="checkout_details_area p-2 sm:p-12  sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
@@ -297,7 +305,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
+  );}
 };
 
 export default Login;

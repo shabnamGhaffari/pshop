@@ -84,14 +84,14 @@ const Categories = ({params}) => {
                   {/* Product Image  */}
                   <div className="product-img">
                     <img
-                      src={item?.images[0]["image_path"]}
-                      alt={item?.images[0]["image_name"]}
+                      src={item?.images[0]?.image_path}
+                      alt={item?.images[0]?.image_name}
                     />
                     {/* Hover Thumb  */}
                     <img
                       className="hover-img"
-                      src={item?.images[1]["image_path"]}
-                      alt={item?.images[1]["image_name"]}
+                      src={item?.images[1]?.image_path}
+                      alt={item?.images[1]?.image_name}
                     />
                   </div>
 

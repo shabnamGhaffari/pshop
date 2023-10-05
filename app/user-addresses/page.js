@@ -27,7 +27,6 @@ const UserAddresses = () => {
   const getProvinceList = async () => {
     try {
       const response = await shopAxios.get("/provinces");
-      console.log(response?.data?.data);
       setProvinceList(response?.data?.data);
     } catch {}
   };

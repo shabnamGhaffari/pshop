@@ -6,24 +6,51 @@ import {AxiosWithToken} from "../../axios/axiosWhithToken";
 
 const Booking = () => {
   const [address, setAddress] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const [orderItems, setOrderItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(null);
+  const [shipping, setShipping] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const {items: basketProductList, totalPrice: basketTotalPrice} = useSelector(
     state => state.basketReducer
   );
   const {addressId} = useSelector(state => state.addressReducer);
-  console.log(addressId);
   const {isAuth} = useSelector(state => state.authReducer);
+
   const getUserAddress = async () => {
     try {
       const response = await AxiosWithToken.get("/user-addresses");
       const address = response?.data?.data?.find(item => item?.id == addressId);
-      setAddress(address);
+      // setAddress(address);
     } catch {}
   };
   useEffect(() => {
     getUserAddress();
+    getShopInfo();
   }, []);
+  const getShopInfo = async () => {
+    const products = basketProductList.map(item => ({
+      id: item.selectedSubProduct,
+      quantity: item.count,
+    }));
+    const formObJ = {address_id: addressId, products};
+    try {
+      const response = await AxiosWithToken.post("/booking", formObJ);
+      setOrderId(response?.data?.data?.id);
+      console.log(response);
+      setOrderItems(response?.data?.data?.order_items);
+      setAddress(response?.data?.data?.address);
+      setTotalPrice(response?.data?.data?.paid_price);
+      setShipping(response?.data?.data?.shipping_fee);
+    } catch {}
+  };
+  const handleSubmit = async () => {
+    try {
+      const response = await AxiosWithToken.post("/pay", {order_id: orderId});
+      console.log(response);
+    } catch {}
+  };
   if (!isAuth) {
     router.replace("/login");
   } else {
@@ -40,57 +67,47 @@ const Booking = () => {
                 <div className="w-[40%]">محصول</div>
                 <div>مبلغ</div>
               </li>
-              {basketProductList?.map(product => (
+              {orderItems?.map(order => (
                 <li className="inline-flex justify-between">
-                  <div className="w-[40%] flex justify-start">
-                    <div className="w-[70%]">{product.name}</div>
-                    <div className="flex justify-between w-[30%]">
-                      <div>{product.selected_color_name}</div>
-                      <div>{product.selected_size_name}</div>
+                  <div className="flex w-[50%] sm:w-[60%] flex-col sm:flex-row justify-start">
+                    <div className="w-[50%]">{order?.product?.name}</div>
+                    <div className="flex flex-col sm:flex-row justify-between w-[50%]">
+                      <div className="w-[60%]">{order?.product?.color}</div>
+                      <div className="w-[40%]">{order?.product?.size}</div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="w-[25px] text-[14px] text-center">
-                      {product.count}
+                  <div className="flex justify-between items-center w-[25%] sm:w-[10%]">
+                    <div className="text-[14px] text-center">
+                      {order?.quantity}
                     </div>
                   </div>
-
-                  <div>{product.price}</div>
+                  <div className="flex w-[35%] sm:w-[20%] justify-end">
+                    {order.product.price} ریال
+                  </div>
                 </li>
               ))}
               <li>
-                <span>مجموع سفارش</span> <span>{basketTotalPrice}</span>
+                <span>مجموع سفارش</span> <span>{totalPrice} ریال</span>
               </li>
               <li>
-                <span>هزینه ارسال</span> <span>Free</span>
+                <span>هزینه ارسال</span> <span>{shipping} ریال</span>
               </li>
               <li>
-                <span>مبلغ کل</span> <span></span>
+                <span>مبلغ کل</span> <span>{totalPrice + shipping} ریال</span>
               </li>
               <li>
                 <span>
-                  آدرس ارسال سفارش: {address?.province} - {address?.county}-
-                  {address?.postal_code} - {address?.address}
-                </span>{" "}
+                  آدرس ارسال سفارش: {address?.province} - {address?.county} -{" "}
+                  {address?.address} - {address?.postal_code}
+                </span>
                 <span></span>
               </li>
             </ul>
-            {/* <div
-                className="flex justify-between items-center"
-                onChange={handleChangePay}>
-                <div className="flex items-center gap-1">
-                  <input type="radio" name="payment" id="pay-1" value="1" />
-                  بانک ملت
-                </div>
-                <div className="flex items-center gap-1">
-                  <input type="radio" name="payment" id="pay-2" value="2" />
-                  بانک سامان
-                </div>
-              </div> */}
             <button
+              onClick={handleSubmit}
               type="button"
               className="mt-10 w-52 text-red-700 disabled:cursor-not-allowed disabled:bg-white disabled:hover:text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-              پرداخت آنلاین
+              ورود به درگاه پرداخت
             </button>
           </>
         </div>
