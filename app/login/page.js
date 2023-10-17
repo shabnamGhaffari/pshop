@@ -23,11 +23,7 @@ const Login = () => {
     confirmPassword: "",
   });
   const [loginInfo, setLoginInfo] = useState({email: "", password: ""});
-  const [pay, setPay] = useState(null);
   const router = useRouter();
-  const handleChangePay = e => {
-    setPay(e.target.value);
-  };
   const handleChange = e => {
     if (e.target.name === "policy") {
       setUserInfo({...userInfo, [e.target.name]: e.target.checked});
@@ -70,15 +66,10 @@ const Login = () => {
       }
       toast.success("ورود با موفقیت انجام شد", {position: "bottom-right"});
       setTimeout(() => {
-        router.back()
-        
-      }, 1000);
+        router.back();
+      }, 2000);
     } catch {}
   };
-  if(isAuth){
-    router.replace("/")
-  }
-  else{
   return (
     <div className="flex flex-col-reverse gap-12 p-2 sm:p-12 lg:flex-row-reverse bg-[#babbf6]">
       <div class="checkout_details_area p-2 sm:p-12  sm:mt-50 rounded-lg bg-[#fff] flex flex-col flex-[50%]">
@@ -118,7 +109,6 @@ const Login = () => {
               />
             </div>
           </div>
-
           <div className="flex flex-col">
             <label for="phone_number">
               شماره تماس <span>*</span>
@@ -176,7 +166,6 @@ const Login = () => {
               className="border rounded-md p-2"
             />
           </div>
-
           <div class="col-12">
             <div className="custom-control custom-checkbox gap-1 items-center flex">
               <input
@@ -213,59 +202,6 @@ const Login = () => {
             ورود
           </div>
           <div className="flex flex-col gap-4">
-            {/* <div className="flex flex-col">
-              <label for="state">
-                استان <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="province"
-                class="form-control"
-                id="state"
-                value={userInfo.province}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="city">
-                شهر <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="city"
-                class="form-control"
-                id="city"
-                value={userInfo.city}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="street_address">
-                آدرس <span>*</span>
-              </label>
-              <input
-                type="text"
-                name="address"
-                className="form-control w-full"
-                id="street_address"
-                value={userInfo.address}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label for="postcode">
-                کد پستی <span>*</span>
-              </label>
-              <input
-                name="postalCode"
-                type="text"
-                class="form-control"
-                id="postcode"
-                value={userInfo.postalCode}
-                onChange={handleChange}
-              />
-            </div> */}
-
             <div className="flex flex-col">
               <label for="email_address">
                 ایمیل<span>*</span>
@@ -305,7 +241,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );}
+  );
 };
 
 export default Login;

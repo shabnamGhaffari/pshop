@@ -11,7 +11,6 @@ const Booking = () => {
   const [totalPrice, setTotalPrice] = useState(null);
   const [shipping, setShipping] = useState(null);
   const router = useRouter();
-  const dispatch = useDispatch();
   const {items: basketProductList, totalPrice: basketTotalPrice} = useSelector(
     state => state.basketReducer
   );
@@ -22,7 +21,6 @@ const Booking = () => {
     try {
       const response = await AxiosWithToken.get("/user-addresses");
       const address = response?.data?.data?.find(item => item?.id == addressId);
-      // setAddress(address);
     } catch {}
   };
   useEffect(() => {

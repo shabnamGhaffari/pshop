@@ -4,9 +4,9 @@ import React, {useEffect, useState} from "react";
 import {shopAxios} from "../../../axios/shopAxios";
 import "../../products/pagination.css";
 import {addToBasket} from "../../../redux/slices/basketSlice";
-import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import Link from "next/link";
 import {useDispatch} from "react-redux";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 const Tags = ({params}) => {
   const [showSubItems, setShowSubItems] = useState(false);
   const [total, setTotal] = useState(null);
@@ -57,22 +57,6 @@ const Tags = ({params}) => {
                 تعداد کل محصولات یافت شده <span>{total}</span>
               </p>
             </div>
-            {/* Sorting  */}
-            {/* <div className="product-sorting flex items-center">
-              <div>مرتب سازی:</div>
-              <form action="#" method="get">
-                <select
-                  name="select"
-                  id="sortByselect"
-                  className="cursor-pointer">
-                  <option value="value">Highest Rated</option>
-                  <option value="value">Newest</option>
-                  <option value="value">Price: $$ - $</option>
-                  <option value="value">Price: $ - $$</option>
-                </select>
-                <input type="submit" className="hidden" value="" />
-              </form>
-            </div> */}
           </div>
           <div className="flex flex-wrap flex-auto justify-between">
             {/* Single Product  */}
@@ -84,14 +68,14 @@ const Tags = ({params}) => {
                   {/* Product Image  */}
                   <div className="product-img">
                     <img
-                      src={item?.images[0]["image_path"]}
-                      alt={item?.images[0]["image_name"]}
+                      src={item?.images[0]?.image_path}
+                      alt={item?.images[0]?.image_name}
                     />
                     {/* Hover Thumb  */}
                     <img
                       className="hover-img"
-                      src={item?.images[1]["image_path"]}
-                      alt={item?.images[1]["image_name"]}
+                      src={item?.images[1]?.image_path}
+                      alt={item?.images[1]?.image_name}
                     />
                   </div>
 
@@ -100,7 +84,6 @@ const Tags = ({params}) => {
                     <span>{item?.manufacturer?.name}</span>
                     <h6>{item?.name}</h6>
                     <p className="product-price">
-                      {/* <span className="old-price">$75.00</span> */}
                       {item?.price}
                     </p>
 
@@ -109,7 +92,6 @@ const Tags = ({params}) => {
                       {/* Add to Cart  */}
                       <div className="add-to-cart-btn">
                         <button
-                          // onClick={() => addToBasketHandler(item)}
                           className="btn essence-btn text-center">
                           اضافه به سبد خرید
                         </button>
@@ -132,20 +114,20 @@ const Tags = ({params}) => {
             total={total}
             current={currentPage}
             onChange={(currentPage, pageSize) => setCurrentPage(currentPage)}
-            // prevIcon={
-            //   <GrFormPrevious
-            //     size={22}
-            //     className="cursor-pointer"
-            //     onClick={prevPage}
-            //   />
-            // }
-            // nextIcon={
-            //   <GrFormNext
-            //     size={22}
-            //     className="cursor-pointer"
-            //     onClick={nextPage}
-            //   />
-            // }
+            prevIcon={
+              <GrFormPrevious
+                size={22}
+                className="cursor-pointer"
+                onClick={prevPage}
+              />
+            }
+            nextIcon={
+              <GrFormNext
+                size={22}
+                className="cursor-pointer"
+                onClick={nextPage}
+              />
+            }
           />
         </div>
       </div>

@@ -1,6 +1,4 @@
 "use client"
-import {useEffect} from "react";
-import {useSelector} from "react-redux";
 import Banner from "../components/main-page/banner";
 import MainCategories from "../components/main-page/categories";
 import PopularProducts from "../components/main-page/popular-products";

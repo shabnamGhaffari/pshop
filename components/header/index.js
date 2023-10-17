@@ -93,13 +93,6 @@ export default function Header() {
                 <MdFavoriteBorder size={25} />
               </Link>
             </div>
-            {/* User Login Info */}
-            {/* <div className="md:w-20 flex items-center justify-center">
-              <Link href="/login">
-                <HiOutlineUser size={25} />
-              </Link>
-            </div> */}
-
             <button
               data-ripple-light="true"
               data-popover-target="menu"

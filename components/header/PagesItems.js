@@ -14,7 +14,6 @@ const PagesItems = props => {
       <div 
       onMouseLeave={closePagesHandlerChildren}
         className={` flex flex-col  left-0 transition-all duration-700 bg-white shadow-md `}>
-        {/* menu  */}
         <div className="flex flex-col gap-2">
           <Link
             href="/"

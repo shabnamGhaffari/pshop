@@ -10,9 +10,7 @@ const Sale = () => {
           style={{"background-image": "url(images/bg-img/bg-5.jpg)"}}>
           <div className="h-100 flex items-center justify-start">
             <div className="cta--text">
-              <h6>-60%</h6>
-              <h2>تخفیف ویژه</h2>
-              <a href="#" className="btn essence-btn text-center">
+              <a href="/products" className="btn essence-btn text-center">
                 خرید
               </a>
             </div>

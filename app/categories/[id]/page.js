@@ -132,20 +132,20 @@ const Categories = ({params}) => {
             total={total}
             current={currentPage}
             onChange={(currentPage, pageSize) => setCurrentPage(currentPage)}
-            // prevIcon={
-            //   <GrFormPrevious
-            //     size={22}
-            //     className="cursor-pointer"
-            //     onClick={prevPage}
-            //   />
-            // }
-            // nextIcon={
-            //   <GrFormNext
-            //     size={22}
-            //     className="cursor-pointer"
-            //     onClick={nextPage}
-            //   />
-            // }
+            prevIcon={
+              <GrFormPrevious
+                size={22}
+                className="cursor-pointer"
+                onClick={prevPage}
+              />
+            }
+            nextIcon={
+              <GrFormNext
+                size={22}
+                className="cursor-pointer"
+                onClick={nextPage}
+              />
+            }
           />
         </div>
       </div>

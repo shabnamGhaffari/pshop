@@ -9,24 +9,15 @@ const AppLogout = ({children}) => {
   const expire_time = new Date(exp).getTime() || 100000;
   console.log(expire_time);
   let timer;
-  //   if (!exp) {
-  //     return children;
-  //   }
-  // this function sets the timer that logs out the user after 10 secs
   const handleLogoutTimer = () => {
     timer = setTimeout(() => {
-      // clears any pending timer.
       resetTimer();
-      // Listener clean up. Removes the existing event listener from the window
       Object.values(events).forEach(item => {
         window.removeEventListener(item, resetTimer);
       });
-      // logs out user
       logoutAction();
-    }, expire_time); // 10000ms = 10secs. You can change the time.
+    }, expire_time); 
   };
-
-  // this resets the timer if it exists.
   const resetTimer = () => {
     if (timer) clearTimeout(timer);
   };

@@ -23,16 +23,12 @@ const FooterPage = () => {
             <Link className="text-gray-light hover:text-white" href="/products">
               فروشگاه
             </Link>
-            {/* <Link className="text-gray-light hover:text-white" href="blog.html">
-              بلاگ
-            </Link> */}
             <Link
               className="text-gray-light hover:text-white"
               href="/contact-us">
               تماس با ما
             </Link>
           </div>
-          {/* Single Widget Area  */}
           <div className="flex flex-[50%]">
             <div className="flex flex-col flex-[50%] gap-4">
               <Link href="#" className="text-gray-light hover:text-white">
@@ -58,9 +54,6 @@ const FooterPage = () => {
             </div>
           </div>
         </div>
-
-        {/* Single Widget Area  */}
-
         <div className="single_widget_area mt-10 md:mt-0">
           <div className="footer_heading mb-30">
             <h6>عضویت</h6>
@@ -102,22 +95,11 @@ const FooterPage = () => {
             </div>
           </div>
         </div>
-        {/* Single Widget Area  */}
-
         <div className="row mt-5">
           <div className="col-md-12 text-center">
-            {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
             Copyright &copy;
-            {/* <script>document.write(new Date().getFullYear());</script> */}
              All
             rights reserved
-            {/* |  */}
-            {/* This template is made with{" "}
-              <i className="fa fa-heart-o" aria-hidden="true"></i> by{" "}
-              <a href="https://colorlib.com" target="_blank">
-                Colorlib
-              </a> */}
-            {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
           </div>
         </div>
       </div>

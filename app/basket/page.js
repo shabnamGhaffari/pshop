@@ -29,7 +29,10 @@ const Basket = () => {
     dispatch(removeFromBasket(product));
   };
   const handleSubmit = () => {
-    isAuth ? router.push("/user-addresses") : router.push("/login");
+    const currentUrl = window.location.pathname;
+    isAuth
+      ? router.push("/user-addresses")
+      : router.push(`/login?next=${currentUrl}`);
   };
   return (
     <>
@@ -61,8 +64,12 @@ const Basket = () => {
                     <div className="flex w-[30%] sm:w-[60%] flex-col sm:flex-row justify-start">
                       <div className="w-[50%]">{product.name}</div>
                       <div className="flex flex-col sm:flex-row justify-between w-[50%]">
-                        <div className="w-[60%]">{product.selected_color_name}</div>
-                        <div className="w-[40%]">{product.selected_size_name}</div>
+                        <div className="w-[60%]">
+                          {product.selected_color_name}
+                        </div>
+                        <div className="w-[40%]">
+                          {product.selected_size_name}
+                        </div>
                       </div>
                     </div>
                     <div className="flex justify-between items-center w-[25%] sm:w-[10%]">
@@ -76,14 +83,15 @@ const Basket = () => {
                         {product.count}
                       </div>
                       <AiOutlineMinusSquare
-                      
                         size={20}
                         cursor="pointer"
                         color="navy"
                         onClick={() => decrementAmountHandler(product)}
                       />
                     </div>
-                    <div title="حذف محصول"className="flex w-[10%] justify-center" >
+                    <div
+                      title="حذف محصول"
+                      className="flex w-[10%] justify-center">
                       <RiDeleteBin2Line
                         size={20}
                         cursor="pointer"
@@ -91,7 +99,9 @@ const Basket = () => {
                         onClick={() => removeHandler(product)}
                       />
                     </div>
-                    <div className="flex w-[35%] sm:w-[20%] justify-end">{product.price} ریال</div>
+                    <div className="flex w-[35%] sm:w-[20%] justify-end">
+                      {product.price} ریال
+                    </div>
                   </li>
                 ))}
                 <li>

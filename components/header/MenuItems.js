@@ -67,7 +67,6 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
           ))}
         </div>
       </div>
-      {/* image of menu */}
       <div className="flex flex-col flex-[25%] items-end px-4 pt-3 pb-7">
         <Image
           src={"/images/bg-img/bg-4.jpg"}
@@ -79,20 +78,4 @@ const MenuItems = ({isMenuOpen, openShopHandler, closeShopHandler}) => {
     </div>
   );
 };
-// export async function getServerSideProps() {
-//   const baseUrl = "http://localhost:8000/api";
-
-//   const shopAxios = axios.create({
-//     baseURL: baseUrl,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-//   const response = await shopAxios.get("/categories");
-//   return {
-//     props: {
-//       response,
-//     },
-//   };
-// }
 export default MenuItems;

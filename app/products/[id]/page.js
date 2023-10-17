@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useEffect, useState} from "react";
-import {GrLinkNext, GrLinkPrevious} from "react-icons/gr";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -39,8 +38,6 @@ const product = ({params}) => {
     slidesToScroll: 1,
     autoplay: true,
     padding: 0,
-    // nextArrow:<GrLinkNext/>,
-    // prevArrow:<GrLinkPrevious/>,
     responsive: [
       {
         breakpoint: 1024,
@@ -111,23 +108,10 @@ const product = ({params}) => {
   }, [color, size]);
   return (
     <>
-      {/* <div className="cart-bg-overlay"></div> */}
-
       <div className="right-side-cart-area">
-        {/* Cart Button  */}
-        {/* <div className="cart-button">
-          <a href="#" id="rightSideCart">
-            <img src="images/core-img/bag.svg" alt="" /> <span>3</span>
-          </a>
-        </div> */}
-
         <div className="cart-content flex">
-          {/* Cart List Area  */}
-
-          {/* Cart Summary  */}
         </div>
       </div>
-
       <section className="single_product_details_area mt-[-4px] flex items-center">
         {/* Single Product Thumb  */}
         <div className="single_product_thumb mt-[-10px] sm:mt-[-20px] lg:mt-0 clearfix">
